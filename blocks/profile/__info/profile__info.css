@@ -1,3 +1,4 @@
-/* .profile__info {
-    align-self: center;
-} */
+.profile__info {
+    align-items: center;
+    margin-top: 22px;
+}
