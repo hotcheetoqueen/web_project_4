@@ -10,13 +10,14 @@ let nameInput = document.querySelector('.modal__input_name');
 let jobInput = document.querySelector('.modal__input_description');
 
 
-const formOpenHandler = () => {
+function formOpenHandler() {
+    overlay.style.opacity = ".5";
+
     if (formModal.style.display === "block") {
-        formModal.style.display = "none";
+        formCloseHandler();
       } else {
         formModal.style.display = "block";
       }
-    overlay.style.opacity = ".5";
 
     nameInput.value = userName.textContent;
     jobInput.value = userJob.textContent;
