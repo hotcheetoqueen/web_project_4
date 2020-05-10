@@ -21,15 +21,14 @@ function formOpenHandler() {
 
     nameInput.value = userName.textContent;
     jobInput.value = userJob.textContent;
-}
-formOpen.addEventListener('click', formOpenHandler);
+
+} formOpen.addEventListener('click', formOpenHandler);
+
 
 function formCloseHandler() {
     formModal.style.display="none";
     overlay.style.opacity = "1";
-
-}
-formClose.addEventListener('click', formCloseHandler);
+} formClose.addEventListener('click', formCloseHandler);
 
 
 form.addEventListener('submit', (evt) => {
