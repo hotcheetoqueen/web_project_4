@@ -1,25 +1,45 @@
-// Let's find the form in the DOM
-let formElement = // Use the querySelector() method
+let formModal = document.querySelector('.modal');
+const formOpen = document.querySelector('.profile__edit-button');
+const formClose = document.querySelector('.modal__close');
+let formSave = document.querySelector('.modal__save-btn');
 
-// Next is the form submit handler, though
-// it won't submit anywhere just yet
-function formSubmitHandler (evt) {
-    evt.preventDefault(); // This line stops the browser from submitting the form in the default way.
-                                                // Having done so, we can define our own way of submitting the form.
-                                                // We'll explain it in more detail later.
-
-    // Let's find the form fields in the DOM
-    let nameInput = // Use querySelector()
-    let jobInput = // Use querySelector()
-
-
-    // Get the values of each field from the corresponding value property
-
-    // Select elements where the field values will be entered
-
-    // Insert new values using the textContent property of the querySelector() method
+function formOpenHandler() {
+    formModal.style.display="block";
 }
 
-// Connect the handler to the form:
-// it will watch the submit event
-formElement.addEventListener('submit', formSubmitHandler);
+formOpen.addEventListener('click', formOpenHandler);
+
+function formCloseHandler() {
+    formModal.style.display="none";
+}
+
+formClose.addEventListener('click', formCloseHandler);
+
+// function formSubmitHandler(evt) {
+//     evt.preventDefault();
+
+//     let nameInput = document.querySelector('.modal__name');
+//     let jobInput = document.querySelector('.modal__description');
+
+//     // Get the values of each field from the corresponding value property
+//     if (nameInput.length > 0) {
+//         nameInput.setAttribute('nameInput', '');
+//     } else {
+//         formElement.setat
+//     }
+
+//     // Select elements where the field values will be entered
+
+//     // Insert new values using the textContent property of the querySelector() method
+//     let profileName = document.querySelector('profile__name').textContent;
+//     let profileJob = document.querySelector('profile__description').textContent;
+
+//     nameInput.value = "";
+//     jobInput.value = "";
+
+//     renderAdded();
+// }
+
+// formSave.addEventListener('submit', formSubmitHandler);
+
+// renderAdded();
