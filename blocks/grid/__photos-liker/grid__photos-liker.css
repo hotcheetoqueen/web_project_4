@@ -1,4 +1,5 @@
 .grid__photos-liker {
     z-index: 1;
-    
+    align-self: center;
+    margin-right: 18px;
 }
