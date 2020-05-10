@@ -3,3 +3,7 @@
     height: 50px;
     align-self: center;
 }
+
+.profile__add-button:hover {
+    opacity: .6;
+}

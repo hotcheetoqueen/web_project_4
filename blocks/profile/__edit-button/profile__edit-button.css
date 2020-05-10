@@ -4,3 +4,7 @@
     margin-right: 154px;
     margin-top: 38px;
 }
+
+.profile__edit-button:hover {
+    opacity: .6;
+}

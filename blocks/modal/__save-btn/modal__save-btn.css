@@ -10,3 +10,7 @@
     line-height: 22px;
     text-align: center;
 }
+
+.modal__save-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}

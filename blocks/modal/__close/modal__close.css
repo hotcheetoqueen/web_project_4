@@ -3,3 +3,7 @@
     top: -45px;
     right: -45px;
 }
+
+.modal__close:hover {
+    opacity: .6;
+}
