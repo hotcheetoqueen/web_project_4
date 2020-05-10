@@ -1,0 +1,14 @@
+@import url('./__background/modal__background.css');
+@import url('./__close/modal__close.css');
+@import url('./__description/modal__description.css');
+@import url('./__name/modal__name.css');
+@import url('./__save-btn/modal__save-btn.css');
+@import url('./__title/modal__title.css');
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}

@@ -1,0 +1,5 @@
+.modal__close {
+    position: absolute;
+    top: -45px;
+    right: -45px;
+}
