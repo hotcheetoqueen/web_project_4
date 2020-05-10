@@ -17,8 +17,8 @@
         <section class="profile">
             <img class="profile__avatar" alt="User's profile image." src="./images/avatar.jpg">
             <div class="profile__info">
-                <h1 class="profile__name">Hotcheetoqueen</h1>
-                <p class="profile__description">Adventurer</p>
+                <h1 class="profile__info_name">Hotcheetoqueen</h1>
+                <p class="profile__info_description">Adventurer</p>
             </div>
             <input type="image" src="./images/Edit_Button.png" class="profile__edit-button">
             <input type="image" src="./images/Add_Button.png" class="profile__add-button">
@@ -75,10 +75,12 @@
         <section class="modal">
             <img class="modal__close" src="./images/Close_Icon.png">
             <div class="modal__background">
+                <form action="#" class="modal__form">
                 <h3 class="modal__title">Edit profile</h3>
-                <input class="modal__name" type="text" placeholder="Name">
-                <input class="modal__description" type="text" placeholder="About me">
-                <button class="modal__save-btn">Save</button>
+                    <input class="modal__input modal__input_name" type="text" placeholder="Name">
+                    <input class="modal__input modal__input_description" type="text" placeholder="About me">
+                    <button class="modal__save-btn" type="submit">Save</button>
+                </form>
             </div>
         </section>
         <script src="./script.js"></script>
