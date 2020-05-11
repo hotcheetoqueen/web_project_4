@@ -2,9 +2,22 @@
     width: 24px;
     height: 24px;
     margin-right: 154px;
-    margin-top: 38px;
+    margin-top: 36px;
+    float: right;
 }
 
 .profile__edit-button:hover {
     opacity: .6;
+}
+
+@media screen and (max-width: 320px) {
+    .profile__edit-button {
+        width: 18px;
+        height: 18px;
+        /* margin-right: 154px;
+        margin-top: 38px; */
+        position: absolute;
+        top: 252px;
+        left: 260px;
+    }
 }

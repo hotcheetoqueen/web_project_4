@@ -2,3 +2,11 @@
     margin-left: 199px;
     margin-bottom: 60px;
 }
+
+@media screen and (max-width: 320px) {
+    .footer__copyright {
+        margin-left: 19px;
+        margin-bottom: 36px;
+        margin-top: 48px;
+    }
+}

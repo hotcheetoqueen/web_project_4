@@ -7,4 +7,15 @@
     margin: 36px 199px 0;
     display: flex;
     justify-content: space-between;
+    width: 882px;
+}
+
+@media screen and (max-width: 320px) {
+    .profile {
+        display: flex;
+        flex-direction: column;
+        width: 282px;
+        margin: 38px auto;
+        justify-content: center;
+    }
 }
