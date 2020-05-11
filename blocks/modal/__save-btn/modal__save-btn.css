@@ -14,3 +14,10 @@
 .modal__save-btn:hover {
     background: rgba(0, 0, 0, 0.8);
 }
+
+@media screen and (max-width: 320px) {
+    .modal__save-btn {
+        width: 205px;
+        height: 40px;
+    }
+}

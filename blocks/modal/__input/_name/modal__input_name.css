@@ -8,3 +8,10 @@
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
+
+@media screen and (max-width: 320px) {
+    .modal__input_name {
+        width: 200px;
+        height: 100%;
+    }
+}
