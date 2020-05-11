@@ -1,6 +1,6 @@
 # Project 4: Around The U.S.
 
-[Check it out here]()
+[Check it out here](https://hcqpersonal.github.io/web_project_4/)
 
 **Tech Stack**
 HTML | CSS | JavaScript
