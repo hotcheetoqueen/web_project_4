@@ -1,9 +1,12 @@
 # Project 4: Around The U.S.
 
-### Overview
+[Check it out here]()
 
-* Figma
-* Images
+**Tech Stack**
+HTML | CSS | JavaScript
+
+**Description and updates plan**
+The current version has both desktop and mobile with the ability to update your profile information live. Future updates may include saving profile information on the server and the ability to add or update photos.
 
 **Figma**
 
@@ -11,6 +14,4 @@
 
 **Images**
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+All images have been exported directly from Figma or pulled from Unsplash and optimized [here](https://tinypng.com/).
