@@ -5,3 +5,9 @@
     align-items: center;
     margin-top: 22px;
 }
+
+@media screen and (max-width: 320px) {
+    .profile__info {
+        margin-top: 10.25px;
+    }
+}
