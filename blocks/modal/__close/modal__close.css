@@ -2,6 +2,11 @@
     position: absolute;
     top: -45px;
     right: -45px;
+    background: url('../../../images/Close_Icon.png');
+    height: 50px;
+    width: 50px;
+    border: 0;
+    padding: 0;
 }
 
 .modal__close:hover {

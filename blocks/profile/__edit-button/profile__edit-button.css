@@ -4,6 +4,8 @@
     margin-right: 154px;
     margin-top: 36px;
     float: right;
+    background: url('../../../images/Edit_Button.png');
+    border: 0;
 }
 
 .profile__edit-button:hover {

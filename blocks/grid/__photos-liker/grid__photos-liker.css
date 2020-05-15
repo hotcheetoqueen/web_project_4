@@ -1,9 +1,13 @@
 .grid__photos-liker {
-    z-index: 1;
     align-self: center;
     margin-right: 18px;
+    background: url('../../../images/Liker.png');
+    background-repeat: no-repeat;
+    border: 0;
+    height: 18.13px;
+    width: 20.76px;
 }
-/* 
+
 .grid__photos-liker:hover {
     opacity: .6;
-} */
+}
