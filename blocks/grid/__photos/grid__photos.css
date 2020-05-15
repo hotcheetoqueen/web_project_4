@@ -2,7 +2,6 @@
     list-style: none;
     display: inline-grid;
     grid-template-columns: repeat(3, 282px);
-    /* grid-template-rows:  repeat(2, 361px); */
     grid-gap: 21px 18px;
     margin: 47px 199px 66px;
     padding: 0;
