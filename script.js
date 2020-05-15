@@ -4,10 +4,10 @@ const formOpen = document.querySelector('.profile__edit-button');
 const formClose = document.querySelector('.modal__close');
 const overlay = document.querySelector('.overlay');
 
-let userName = document.querySelector('.profile__info_name');
-let userJob = document.querySelector('.profile__info_description');
-let nameInput = document.querySelector('.modal__input_name');
-let jobInput = document.querySelector('.modal__input_description');
+const userName = document.querySelector('.profile__info_name');
+const userJob = document.querySelector('.profile__info_description');
+const nameInput = document.querySelector('.modal__input_name');
+const jobInput = document.querySelector('.modal__input_description');
 
 
 function formOpenHandler() {
@@ -37,6 +37,5 @@ form.addEventListener('submit', (evt) => {
     userName.textContent = nameInput.value;
     userJob.textContent = jobInput.value;
 
-    form.submit()
     formCloseHandler();
 });
