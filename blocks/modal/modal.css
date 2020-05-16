@@ -13,3 +13,7 @@
     z-index: 2;
     display: none;
 }
+
+.modal_visible {
+    display: flex;
+}
