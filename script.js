@@ -67,6 +67,7 @@ imageForm.addEventListener('submit', (evt) => {
     placeCaption.textContent = captionInput.value;
     placeImage.textContent = imageInput.value;
 
+    // createCard();
     toggleImgHandler();
 });
 
@@ -121,9 +122,17 @@ function createCard(card) {
         //deleteCardInstance() .remove()
     });
 
+    cardElement.addEventListener('click', () => {
+// make popup height 540px with same background opacity
+    });
+
     return cardElement;
 };
 
+function setCard(card) {
+    listWrapper.prepend(card);
+}
+
 defaultCards.forEach((card) => {
-    listWrapper.prepend(createCard(card));
+    setCard(createCard(card));
 });
