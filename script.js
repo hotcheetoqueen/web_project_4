@@ -22,7 +22,7 @@ const jobInput = document.querySelector('.modal__input_description');
 const placeCaption = document.querySelector('grid__photos-caption');
 const placeImage = document.querySelector('grid__photos-image');
 const captionInput = document.querySelector('.modal__input_caption');
-const imageInput = document.querySelector('modal__input_image-link');
+const imageInput = document.querySelector('.modal__input_image-link');
 
 
 // Profile form handler
