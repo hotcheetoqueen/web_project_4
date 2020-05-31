@@ -1,0 +1,10 @@
+.grid__photos-delete {
+    /* background-image: url('../../../../images/Trash.svg'); */
+    width: 18px;
+    height: 19.3px;
+    background-size: cover;
+    position: absolute;
+    top: 19px;
+    right: 15px;
+    z-index: 2;
+}
