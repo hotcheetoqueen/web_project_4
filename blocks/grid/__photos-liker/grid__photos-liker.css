@@ -11,3 +11,11 @@
 .grid__photos-liker:hover {
     opacity: .6;
 }
+
+.grid__photos-liker_on {
+    background: url('../../../images/Filled_heart.svg');
+}
+
+.grid__photos-liker_on:hover {
+    opacity: 1;
+}

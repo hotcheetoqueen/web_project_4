@@ -115,7 +115,7 @@ function createCard(card) {
     cardImage.style.backgroundImage = 'url(' + card.link + ')';
 
     cardLikeButton.addEventListener('click', () => {
-        //changeLikeColor() background-color: #000000; make modifier
+        cardLikeButton.classList.toggle('grid__photos-liker_on')
     });
 
     cardDeleteButton.addEventListener('click', () => {
