@@ -1,15 +1,18 @@
 .grid__photos-delete {
-    /* background-image: url('../../../../images/Trash.svg'); */
+    background-image: url('../../../images/Delete.png');
     width: 18px;
     height: 19.3px;
-    background-size: cover;
+    background-size: contain;
     position: absolute;
     top: 19px;
     right: 15px;
-    z-index: 2;
+    z-index: 1;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
 }
 
-.profile__photos-delete:hover {
+.grid__photos-delete:hover {
     opacity: .6;
     cursor: pointer;
 }
