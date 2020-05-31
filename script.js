@@ -67,8 +67,16 @@ imageForm.addEventListener('submit', (evt) => {
     placeCaption.textContent = captionInput.value;
     placeImage.textContent = imageInput.value;
 
-    // createCard();
     toggleImgHandler();
+});
+
+profileForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    userName.textContent = nameInput.value;
+    userJob.textContent = jobInput.value;
+
+    // createCard();;
 });
 
 
@@ -103,6 +111,8 @@ const defaultCards = [
 const cardTemplate = document.querySelector('.grid__card-template').content.querySelector('.grid__photos-item');
 const listWrapper = document.querySelector('.grid__photos');
 
+
+
 function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
 
@@ -116,15 +126,16 @@ function createCard(card) {
     cardImage.style.backgroundImage = 'url(' + card.link + ')';
 
     cardLikeButton.addEventListener('click', () => {
-        cardLikeButton.classList.toggle('grid__photos-liker_on')
+        cardLikeButton.classList.toggle('grid__photos-liker_on');
     });
 
     cardDeleteButton.addEventListener('click', () => {
-        cardItem.remove('.grid__card-item')
+        cardElement.remove();
     });
 
     cardElement.addEventListener('click', () => {
-// make popup height 540px with same background opacity
+        cardImage.classList.toggle('grid__photos-item_popped');
+        overlay.classList.toggle('overlay_visible');
     });
 
     return cardElement;
