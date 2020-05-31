@@ -8,3 +8,8 @@
     right: 15px;
     z-index: 2;
 }
+
+.profile__photos-delete:hover {
+    opacity: .6;
+    cursor: pointer;
+}
