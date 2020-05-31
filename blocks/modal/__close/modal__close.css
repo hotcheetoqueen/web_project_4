@@ -22,3 +22,7 @@
         right: -20px;
     }
 }
+
+.modal__close:focus {
+    outline: none;
+}

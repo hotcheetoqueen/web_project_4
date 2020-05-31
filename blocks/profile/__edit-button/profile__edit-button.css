@@ -26,3 +26,7 @@
         margin: 0;
     }
 }
+
+.profile__edit-button:focus {
+    outline: none;
+}

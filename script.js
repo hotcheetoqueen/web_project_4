@@ -106,6 +106,7 @@ const listWrapper = document.querySelector('.grid__photos');
 function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
 
+    const cardItem = cardElement.querySelector('.grid__card-item');
     const cardImage = cardElement.querySelector('.grid__photos-image');
     const cardTitle = cardElement.querySelector('.grid__photos-caption');
     const cardLikeButton = cardElement.querySelector('.grid__photos-liker');
@@ -119,7 +120,7 @@ function createCard(card) {
     });
 
     cardDeleteButton.addEventListener('click', () => {
-        //deleteCardInstance() .remove()
+        cardItem.remove('.grid__card-item')
     });
 
     cardElement.addEventListener('click', () => {

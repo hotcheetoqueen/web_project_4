@@ -23,3 +23,7 @@
         height: 40px;
     }
 }
+
+.modal__save-btn:focus {
+    outline: none;
+}

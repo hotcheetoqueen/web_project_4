@@ -17,7 +17,6 @@
     background: url('../../../images/Filled_heart.svg');
 }
 
-.grid__photos-liker_on:hover {
-    opacity: 1;
-    cursor: pointer;
+.grid__photos-liker:focus {
+    outline: none;
 }

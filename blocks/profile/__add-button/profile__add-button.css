@@ -19,3 +19,7 @@
         background: url('../../../images/AddButton_wide.png');
     }
 }
+
+.profile__add-button:focus {
+    outline: none;
+}
