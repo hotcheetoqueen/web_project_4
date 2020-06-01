@@ -61,26 +61,8 @@ imageFormOpen.addEventListener('click', toggleImgHandler);
 imageFormClose.addEventListener('click', toggleImgHandler);
 
 
-imageForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    placeCaption.textContent = captionInput.value;
-    placeImage.textContent = imageInput.value;
-
-    toggleImgHandler();
-});
-
-profileForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    userName.textContent = nameInput.value;
-    userJob.textContent = jobInput.value;
-
-    // createCard();;
-});
-
-
 // Cards handler
+// Initial images
 const defaultCards = [
     {
         name: "Yosemite Valley",
@@ -108,11 +90,38 @@ const defaultCards = [
     }
 ]
 
+// Initial function to create gallery
 const cardTemplate = document.querySelector('.grid__card-template').content.querySelector('.grid__photos-item');
 const listWrapper = document.querySelector('.grid__photos');
 
+function setCard(card) {
+    listWrapper.prepend(card);
+}
 
+defaultCards.forEach((card) => {
+    setCard(createCard(card));
+});
 
+// Image pop up
+const popOpen = document.querySelector('.grid__photos-image');
+const popUp = document.querySelector('.grid__card-popup')
+const popClose = document.querySelector('.grid__card-popup-close');
+
+const togglePopHandler = () => {
+    overlay.classList.toggle('overlay_visible');
+    popUp.classList.toggle('grid__card-popup_visible');
+}
+
+popOpen.addEventListener('click', togglePopHandler);
+popClose.addEventListener('click', togglePopHandler);
+
+// const cardPopup = document.querySelector('.grid__card-popup').content.querySelector('.grid__photos-image_fig');
+
+// function cardPop(card) {
+//     cardPopup.classList.toggle('grid__card-popup_visible');
+// }
+
+// Create new user generated cards
 function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
 
@@ -133,18 +142,30 @@ function createCard(card) {
         cardElement.remove();
     });
 
-    cardElement.addEventListener('click', () => {
-        cardImage.classList.toggle('grid__photos-item_popped');
-        overlay.classList.toggle('overlay_visible');
-    });
+    // cardElement.addEventListener('click', () => {
+    //     cardImage.classList.toggle('grid__photos-item_popped');
+    //     overlay.classList.toggle('overlay_visible');
+    // });
 
     return cardElement;
 };
 
-function setCard(card) {
-    listWrapper.prepend(card);
-}
 
-defaultCards.forEach((card) => {
-    setCard(createCard(card));
+const createBtn = document.querySelector ('.modal__save-btn_create')
+
+createBtn.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    placeCaption.textContent = captionInput.value;
+    placeImage.textContent = imageInput.value;
+
+    createCard();;
+    toggleImgHandler();
 });
+
+// defaultCards.map(function (card) {
+
+//     return cardElement;
+// }
+//     elementList.prepend(cardElement);
+// )

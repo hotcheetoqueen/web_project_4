@@ -1,0 +1,17 @@
+.grid__photos-image_fig {
+    /* background-image: url('../../../../images/Seqouia.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: center; */
+        height: 540px;
+        width: 75vw;
+        object-fit: contain;
+    }
+    
+    @media screen and (max-width: 320px) {
+        .grid__photos-image_fig {
+            width: 240px;
+            height: 100%;
+        }
+    }    
+}
