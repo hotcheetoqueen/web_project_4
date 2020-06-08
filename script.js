@@ -1,28 +1,68 @@
+// Initial images
+const defaultCards = [
+    {
+        name: "Yosemite Valley",
+        link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+    },
+    {
+        name: "Lake Louise",
+        link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+    },
+    {
+        name: "Bald Mountains",
+        link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+    },
+    {
+        name: "Latemar",
+        link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+    },
+    {
+        name: "Vanois National Park",
+        link: "https://code.s3.yandex.net/web-code/vanois.jpg"
+    },
+    {
+        name: "Lago di Braies",
+        link: "https://code.s3.yandex.net/web-code/lago.jpg"
+    }
+]
+
 // Modal triggers
 const profileFormOpen = document.querySelector('.profile__edit-button');
-const imageFormOpen = document.querySelector('.profile__add-button');
 const profileFormClose = document.querySelector('.modal__close_profile');
+
+const imageFormOpen = document.querySelector('.profile__add-button');
 const imageFormClose = document.querySelector('.modal__close_image');
+
 const overlay = document.querySelector('.overlay');
 
 // Modal forms
-const profileModal = document.querySelector('.modal_profile');
-const imageModal = document.querySelector('.modal_image');
 const form = document.querySelector('.modal__form');
+
 const profileForm = document.querySelector('.modal__form_profile');
+const profileModal = document.querySelector('.modal_profile');
+
+const imageModal = document.querySelector('.modal_image');
 const imageForm = document.querySelector('.modal__form_image');
 
 // Profile form data
 const userName = document.querySelector('.profile__info_name');
-const userJob = document.querySelector('.profile__info_description');
 const nameInput = document.querySelector('.modal__input_name');
+
+const userJob = document.querySelector('.profile__info_description');
 const jobInput = document.querySelector('.modal__input_description');
 
 // Photos form data
-const placeCaption = document.querySelector('grid__photos-caption');
-const placeImage = document.querySelector('grid__photos-image');
+const placeCaption = document.querySelector('.grid__photos-caption');
 const captionInput = document.querySelector('.modal__input_caption');
+
+const placeImage = document.querySelector('.grid__photos-image');
 const imageInput = document.querySelector('.modal__input_image-link');
+
+
+// Image pop up
+const popOpen = document.querySelector('.grid__photos-item');
+const popUp = document.querySelector('.card-popup__figure')
+const popClose = document.querySelector('.card-popup__close');
 
 
 // Profile form handler
@@ -52,79 +92,48 @@ profileForm.addEventListener('submit', (evt) => {
 const toggleImgHandler = () => {
     overlay.classList.toggle('overlay_visible');
     imageModal.classList.toggle('modal_visible');
-
-    captionInput.value = placeCaption.textContent;
-    imageInput.value = placeImage.textContent;
 }
 
 imageFormOpen.addEventListener('click', toggleImgHandler);
 imageFormClose.addEventListener('click', toggleImgHandler);
 
+const createBtn = document.querySelector('.modal__save-btn_create');
 
-// Initial images
-const defaultCards = [
-    {
-        name: "Yosemite Valley",
-        link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
-    },
-    {
-        name: "Lake Louise",
-        link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
-    },
-    {
-        name: "Bald Mountains",
-        link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
-    },
-    {
-        name: "Latemar",
-        link: "https://code.s3.yandex.net/web-code/latemar.jpg"
-    },
-    {
-        name: "Vanois National Park",
-        link: "https://code.s3.yandex.net/web-code/vanois.jpg"
-    },
-    {
-        name: "Lago di Braies",
-        link: "https://code.s3.yandex.net/web-code/lago.jpg"
-    }
-]
+createBtn.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    placeCaption.textContent = captionInput.value;
+    placeImage.textContent  = imageInput.value;
+
+    const newCard = {
+        name: captionInput.value,
+        link: imageInput.value
+    };
+
+    setCard(createCard(newCard));
+    toggleImgHandler();
+});
+
+
 
 // Initial function to create gallery
 const cardTemplate = document.querySelector('.grid__card-template').content.querySelector('.grid__photos-item');
 const listWrapper = document.querySelector('.grid__photos');
 
 function setCard(card) {
-    listWrapper.prepend(card);
+    listWrapper.prepend(createCard(card));
 }
 
 defaultCards.forEach((card) => {
-    setCard(createCard(card));
+    setCard(card);
 });
 
-// Image pop up
-const popOpen = document.querySelector('.grid__photos-item');
-const popUp = document.querySelector('.card-popup__figure')
-const popClose = document.querySelector('.card-popup__close');
-
-const togglePopHandler = () => {
-    overlay.classList.toggle('overlay_visible');
-    popUp.classList.toggle('card-popup__figure_visible');
-}
-
-popOpen.addEventListener('click', togglePopHandler);
-popClose.addEventListener('click', togglePopHandler);
-
-// const cardPopup = document.querySelector('.card-popup').content.querySelector('.card-popup__image');
-
-// function cardPop(card) {
-//     cardPopup.classList.toggle('card-popup_visible');
-// }
 
 // Create new user generated cards
 function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
 
-    const cardItem = cardElement.querySelector('.grid__card-item');
+    // const cardItem = cardElement.querySelector('.grid__card-item');
     const cardImage = cardElement.querySelector('.grid__photos-image');
     const cardTitle = cardElement.querySelector('.grid__photos-caption');
     const cardLikeButton = cardElement.querySelector('.grid__photos-liker');
@@ -141,30 +150,22 @@ function createCard(card) {
         cardElement.remove();
     });
 
-    // cardElement.addEventListener('click', () => {
-    //     cardImage.classList.toggle('grid__photos-item_popped');
-    //     overlay.classList.toggle('overlay_visible');
-    // });
+    imageModal.addEventListener('click', () => {
+        imageForm.src = `${card.link}`;
+        imageForm.alt = `${card.name.replace(/\s+/g, '-').toLowerCase()}`;
+        imageCaption.textContent = card.name;
+        toggleImgHandler;
+      });
 
     return cardElement;
 };
 
 
-const createBtn = document.querySelector ('.modal__save-btn_create')
+// Pop open existing images
+const togglePopHandler = () => {
+    overlay.classList.toggle('overlay_visible');
+    popUp.classList.toggle('card-popup__figure_visible');
+}
 
-createBtn.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    placeCaption.textContent = captionInput.value;
-    placeImage.textContent = imageInput.value;
-
-    createCard();;
-    toggleImgHandler();
-});
-
-// defaultCards.map(function (card) {
-
-//     return cardElement;
-// }
-//     elementList.prepend(cardElement);
-// }
+popOpen.addEventListener('click', togglePopHandler);
+popClose.addEventListener('click', togglePopHandler);
