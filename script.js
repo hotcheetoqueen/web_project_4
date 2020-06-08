@@ -61,7 +61,6 @@ imageFormOpen.addEventListener('click', toggleImgHandler);
 imageFormClose.addEventListener('click', toggleImgHandler);
 
 
-// Cards handler
 // Initial images
 const defaultCards = [
     {
@@ -103,22 +102,22 @@ defaultCards.forEach((card) => {
 });
 
 // Image pop up
-const popOpen = document.querySelector('.grid__photos-image');
-const popUp = document.querySelector('.grid__card-popup')
-const popClose = document.querySelector('.grid__card-popup-close');
+const popOpen = document.querySelector('.grid__photos-item');
+const popUp = document.querySelector('.card-popup__figure')
+const popClose = document.querySelector('.card-popup__close');
 
 const togglePopHandler = () => {
     overlay.classList.toggle('overlay_visible');
-    popUp.classList.toggle('grid__card-popup_visible');
+    popUp.classList.toggle('card-popup__figure_visible');
 }
 
 popOpen.addEventListener('click', togglePopHandler);
 popClose.addEventListener('click', togglePopHandler);
 
-// const cardPopup = document.querySelector('.grid__card-popup').content.querySelector('.grid__photos-image_fig');
+// const cardPopup = document.querySelector('.card-popup').content.querySelector('.card-popup__image');
 
 // function cardPop(card) {
-//     cardPopup.classList.toggle('grid__card-popup_visible');
+//     cardPopup.classList.toggle('card-popup_visible');
 // }
 
 // Create new user generated cards
@@ -168,4 +167,4 @@ createBtn.addEventListener('submit', (evt) => {
 //     return cardElement;
 // }
 //     elementList.prepend(cardElement);
-// )
+// }

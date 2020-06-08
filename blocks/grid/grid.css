@@ -1,11 +1,8 @@
-@import url('./__card-popup/grid__card-popup.css');
-@import url('./__card-popup/grid__card-popup-close.css');
 @import url('./__photos/grid__photos.css');
 @import url('./__photos-base/grid__photos-base.css');
 @import url('./__photos-caption/grid__photos-caption.css');
 @import url('./__photos-delete/grid__photos-delete.css');
 @import url('./__photos-image/grid__photos-image.css');
-@import url('./__photos-image_fig/grid__photos-image_fig.css');
 @import url('./__photos-img-area/grid__photos-img-area.css');
 @import url('./__photos-item/grid__photos-item.css');
 @import url('./__photos-liker/grid__photos-liker.css');

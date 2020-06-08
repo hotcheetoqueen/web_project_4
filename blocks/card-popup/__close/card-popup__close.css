@@ -1,4 +1,4 @@
-.grid__card_popup-close {
+.card-popup__close {
     position: absolute;
     top: -45px;
     right: -45px;
@@ -7,16 +7,15 @@
     width: 50px;
     border: 0;
     padding: 0;
-    display: none;
 }
 
-.grid__card_popup-close:hover {
+.card-popup__close:hover {
     opacity: .6;
     cursor: pointer;
 }
 
 @media screen and (max-width: 320px) {
-    .grid__card_popup-close {
+    .card-popup__close {
         width: 50px;
         height: 50px;
         top: -50px;
@@ -24,6 +23,6 @@
     }
 }
 
-.grid__card_popup-close:focus {
+.card-popup__close:focus {
     outline: none;
 }

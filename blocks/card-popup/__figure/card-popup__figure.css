@@ -1,12 +1,12 @@
-.grid__card-popup {
+.card-popup__figure {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    /* display: none; */
+    display: none;
 }
 
-.grid__card-popup_visible {
+.card-popup__figure_visible {
     display: flex;
 }
