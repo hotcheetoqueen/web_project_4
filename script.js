@@ -61,8 +61,12 @@ const imageInput = document.querySelector('.modal__input_image-link');
 
 // Image pop up
 const popOpen = document.querySelector('.grid__photos-item');
+const popTemp = document.querySelector('.grid__card-template');
 const popUp = document.querySelector('.card-popup__figure')
 const popClose = document.querySelector('.card-popup__close');
+
+const popImage = document.querySelector('.card-popup__image');
+const popTitle = document.querySelector('.card-popup__caption');
 
 
 // Profile form handler
@@ -110,6 +114,15 @@ defaultCards.forEach((card) => {
     setCard(card);
 });
 
+// Pop open existing images
+const togglePopHandler = () => {
+    console.log('it is working');
+    overlay.classList.toggle('overlay_visible');
+    popUp.classList.toggle('card-popup__figure_visible');
+}
+
+popTemp.addEventListener('click', togglePopHandler);
+popClose.addEventListener('click', togglePopHandler);
 
 // Create new user generated cards
 function createCard(card) {
@@ -120,9 +133,6 @@ function createCard(card) {
     let cardTitle = cardElement.querySelector('.grid__photos-caption');
     const cardLikeButton = cardElement.querySelector('.grid__photos-liker');
     const cardDeleteButton = cardElement.querySelector('.grid__photos-delete');
-
-    const popImage = cardElement.querySelector('.card-popup__image');
-    const popTitle = cardElement.querySelector('.card-popup__caption');
 
     const cardImageLink = cardElement.querySelector('.modal__input_image-link');
 
@@ -140,7 +150,7 @@ function createCard(card) {
     cardImage.addEventListener('click', () => {
         popImage.src = `${card.link}`;
         popTitle.textContent = card.name;
-        toggleImgHandler;
+        togglePopHandler();
       });
 
     return cardElement;
@@ -148,13 +158,8 @@ function createCard(card) {
 
 
 // Create new card
-const createBtn = document.querySelector('.modal__save-btn_create');
-
 imageModal.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
-    // placeCaption.textContent = captionInput.value;
-    // placeImage.textContent  = imageInput.value;
 
     const newCard = {
         name: captionInput.value,
@@ -164,14 +169,3 @@ imageModal.addEventListener('submit', (evt) => {
     setCard(newCard);
     toggleImgHandler();
 });
-
-
-
-// Pop open existing images
-const togglePopHandler = () => {
-    overlay.classList.toggle('overlay_visible');
-    popUp.classList.toggle('card-popup__figure_visible');
-}
-
-popOpen.addEventListener('click', togglePopHandler);
-popClose.addEventListener('click', togglePopHandler);
