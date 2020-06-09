@@ -24,7 +24,7 @@ const defaultCards = [
         name: "Lago di Braies",
         link: "https://code.s3.yandex.net/web-code/lago.jpg"
     }
-]
+];
 
 // Modal triggers
 const profileFormOpen = document.querySelector('.profile__edit-button');
@@ -120,7 +120,9 @@ function createCard(card) {
     let cardTitle = cardElement.querySelector('.grid__photos-caption');
     const cardLikeButton = cardElement.querySelector('.grid__photos-liker');
     const cardDeleteButton = cardElement.querySelector('.grid__photos-delete');
+
     const popImage = cardElement.querySelector('.card-popup__image');
+    const popTitle = cardElement.querySelector('.card-popup__caption');
 
     const cardImageLink = cardElement.querySelector('.modal__input_image-link');
 
@@ -137,7 +139,7 @@ function createCard(card) {
 
     cardImage.addEventListener('click', () => {
         popImage.src = `${card.link}`;
-        imageCaption.textContent = card.name;
+        popTitle.textContent = card.name;
         toggleImgHandler;
       });
 
@@ -159,7 +161,7 @@ imageModal.addEventListener('submit', (evt) => {
         link: imageInput.value
     };
 
-    setCard(createCard(newCard));
+    setCard(newCard);
     toggleImgHandler();
 });
 
