@@ -11,3 +11,10 @@
 .card-popup__figure_visible {
     display: flex;
 }
+
+@media screen and (max-width: 320px) {
+    .card-popup__figure {
+        margin: auto;
+        text-align: left;
+    }
+}
