@@ -97,24 +97,6 @@ const toggleImgHandler = () => {
 imageFormOpen.addEventListener('click', toggleImgHandler);
 imageFormClose.addEventListener('click', toggleImgHandler);
 
-const createBtn = document.querySelector('.modal__save-btn_create');
-
-createBtn.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    placeCaption.textContent = captionInput.value;
-    placeImage.textContent  = imageInput.value;
-
-    const newCard = {
-        name: captionInput.value,
-        link: imageInput.value
-    };
-
-    setCard(createCard(newCard));
-    toggleImgHandler();
-});
-
-
 
 // Initial function to create gallery
 const cardTemplate = document.querySelector('.grid__card-template').content.querySelector('.grid__photos-item');
@@ -133,14 +115,17 @@ defaultCards.forEach((card) => {
 function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
 
-    // const cardItem = cardElement.querySelector('.grid__card-item');
-    const cardImage = cardElement.querySelector('.grid__photos-image');
-    const cardTitle = cardElement.querySelector('.grid__photos-caption');
+    const cardItem = cardElement.querySelector('.grid__card-item');
+    let cardImage = cardElement.querySelector('.grid__photos-image');
+    let cardTitle = cardElement.querySelector('.grid__photos-caption');
     const cardLikeButton = cardElement.querySelector('.grid__photos-liker');
     const cardDeleteButton = cardElement.querySelector('.grid__photos-delete');
+    const popImage = cardElement.querySelector('.card-popup__image');
+
+    const cardImageLink = cardElement.querySelector('.modal__input_image-link');
 
     cardTitle.textContent = card.name;
-    cardImage.style.backgroundImage = 'url(' + card.link + ')';
+    cardImage.style.backgroundImage = `url('${card.link}')`;
 
     cardLikeButton.addEventListener('click', () => {
         cardLikeButton.classList.toggle('grid__photos-liker_on');
@@ -150,15 +135,34 @@ function createCard(card) {
         cardElement.remove();
     });
 
-    imageModal.addEventListener('click', () => {
-        imageForm.src = `${card.link}`;
-        imageForm.alt = `${card.name.replace(/\s+/g, '-').toLowerCase()}`;
+    cardImage.addEventListener('click', () => {
+        popImage.src = `${card.link}`;
         imageCaption.textContent = card.name;
         toggleImgHandler;
       });
 
     return cardElement;
 };
+
+
+// Create new card
+const createBtn = document.querySelector('.modal__save-btn_create');
+
+imageModal.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    // placeCaption.textContent = captionInput.value;
+    // placeImage.textContent  = imageInput.value;
+
+    const newCard = {
+        name: captionInput.value,
+        link: imageInput.value
+    };
+
+    setCard(createCard(newCard));
+    toggleImgHandler();
+});
+
 
 
 // Pop open existing images
