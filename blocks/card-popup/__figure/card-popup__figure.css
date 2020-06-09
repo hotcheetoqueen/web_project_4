@@ -5,11 +5,14 @@
     transform: translate(-50%, -50%);
     z-index: 2;
     flex-direction: column;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .2s, opacity .5s linear;
 }
 
 .card-popup__figure_visible {
-    display: flex;
+    visibility: visible;
+    opacity: 1;
 }
 
 @media screen and (max-width: 320px) {
