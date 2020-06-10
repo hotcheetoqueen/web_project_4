@@ -138,7 +138,7 @@ function createCard(card) {
         cardElement.remove();
     });
 
-    cardImage.addEventListener('click', () => {
+    cardImage.addEventListener('click', (e) => {
         if (profileModal.classList.contains('modal_visible') || imageModal.classList.contains('modal_visible')) {
             e.preventDefault();
         } else {
