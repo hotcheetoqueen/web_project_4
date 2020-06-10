@@ -36,13 +36,10 @@ const imageFormClose = document.querySelector('.modal__close_image');
 const overlay = document.querySelector('.overlay');
 
 // Modal forms
-const form = document.querySelector('.modal__form');
-
 const profileForm = document.querySelector('.modal__form_profile');
 const profileModal = document.querySelector('.modal_profile');
 
 const imageModal = document.querySelector('.modal_image');
-const imageForm = document.querySelector('.modal__form_image');
 
 // Profile form data
 const userName = document.querySelector('.profile__info_name');
@@ -52,17 +49,13 @@ const userJob = document.querySelector('.profile__info_description');
 const jobInput = document.querySelector('.modal__input_description');
 
 // Photos form data
-const placeCaption = document.querySelector('.grid__photos-caption');
 const captionInput = document.querySelector('.modal__input_caption');
-
-const placeImage = document.querySelector('.grid__photos-image');
 const imageInput = document.querySelector('.modal__input_image-link');
 
 
 // Image pop up
-const popOpen = document.querySelector('.grid__photos-item');
 const popTemp = document.querySelector('.grid__card-template');
-const popUp = document.querySelector('.card-popup__figure')
+const popUp = document.querySelector('.card-popup__figure');
 const popClose = document.querySelector('.card-popup__close');
 
 const popImage = document.querySelector('.card-popup__image');
@@ -76,7 +69,7 @@ const toggleHandler = () => {
 
     nameInput.value = userName.textContent;
     jobInput.value = userJob.textContent;
-}
+};
 
 profileFormOpen.addEventListener('click', toggleHandler);
 profileFormClose.addEventListener('click', toggleHandler);
@@ -96,7 +89,7 @@ profileForm.addEventListener('submit', (evt) => {
 const toggleImgHandler = () => {
     overlay.classList.toggle('overlay_visible');
     imageModal.classList.toggle('modal_visible');
-}
+};
 
 imageFormOpen.addEventListener('click', toggleImgHandler);
 imageFormClose.addEventListener('click', toggleImgHandler);
@@ -106,35 +99,25 @@ imageFormClose.addEventListener('click', toggleImgHandler);
 const cardTemplate = document.querySelector('.grid__card-template').content.querySelector('.grid__photos-item');
 const listWrapper = document.querySelector('.grid__photos');
 
-function setCard(card) {
-    listWrapper.prepend(createCard(card));
-}
-
-defaultCards.forEach((card) => {
-    setCard(card);
-});
 
 // Pop open existing images
 const togglePopHandler = () => {
-    console.log('it is working');
     overlay.classList.toggle('overlay_visible');
     popUp.classList.toggle('card-popup__figure_visible');
-}
+};
 
 popTemp.addEventListener('click', togglePopHandler);
 popClose.addEventListener('click', togglePopHandler);
+
 
 // Create new user generated cards
 function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
 
-    const cardItem = cardElement.querySelector('.grid__card-item');
-    let cardImage = cardElement.querySelector('.grid__photos-image');
-    let cardTitle = cardElement.querySelector('.grid__photos-caption');
+    const cardImage = cardElement.querySelector('.grid__photos-image');
+    const cardTitle = cardElement.querySelector('.grid__photos-caption');
     const cardLikeButton = cardElement.querySelector('.grid__photos-liker');
     const cardDeleteButton = cardElement.querySelector('.grid__photos-delete');
-
-    const cardImageLink = cardElement.querySelector('.modal__input_image-link');
 
     cardTitle.textContent = card.name;
     cardImage.style.backgroundImage = `url('${card.link}')`;
@@ -154,7 +137,16 @@ function createCard(card) {
       });
 
     return cardElement;
-};
+}
+
+
+function setCard(card) {
+    listWrapper.prepend(createCard(card));
+}
+
+defaultCards.forEach((card) => {
+    setCard(card);
+});
 
 
 // Create new card
