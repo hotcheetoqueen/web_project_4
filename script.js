@@ -63,12 +63,16 @@ const popTitle = document.querySelector('.card-popup__caption');
 
 
 // Profile form handler
-const toggleHandler = () => {
-    overlay.classList.toggle('overlay_visible');
-    profileModal.classList.toggle('modal_visible');
+const toggleHandler = (e) => {
+    if (imageModal.classList.contains('modal_visible')) {
+        e.preventDefault();
+    } else {
+        overlay.classList.toggle('overlay_visible');
+        profileModal.classList.toggle('modal_visible');
 
-    nameInput.value = userName.textContent;
-    jobInput.value = userJob.textContent;
+        nameInput.value = userName.textContent;
+        jobInput.value = userJob.textContent;
+    }
 };
 
 profileFormOpen.addEventListener('click', toggleHandler);
@@ -86,9 +90,13 @@ profileForm.addEventListener('submit', (evt) => {
 
 
 // Photos form handler
-const toggleImgHandler = () => {
-    overlay.classList.toggle('overlay_visible');
-    imageModal.classList.toggle('modal_visible');
+const toggleImgHandler = (e) => {
+    if (profileModal.classList.contains('modal_visible')) {
+        e.preventDefault();
+    } else {
+        overlay.classList.toggle('overlay_visible');
+        imageModal.classList.toggle('modal_visible');
+    }
 };
 
 imageFormOpen.addEventListener('click', toggleImgHandler);
