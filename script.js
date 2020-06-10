@@ -64,7 +64,7 @@ const popTitle = document.querySelector('.card-popup__caption');
 
 // Profile form handler
 const toggleHandler = (e) => {
-    if (imageModal.classList.contains('modal_visible')) {
+    if (imageModal.classList.contains('modal_visible') || popUp.classList.contains('card-popup__figure_visible')) {
         e.preventDefault();
     } else {
         overlay.classList.toggle('overlay_visible');
@@ -91,7 +91,7 @@ profileForm.addEventListener('submit', (evt) => {
 
 // Photos form handler
 const toggleImgHandler = (e) => {
-    if (profileModal.classList.contains('modal_visible')) {
+    if (profileModal.classList.contains('modal_visible') || popUp.classList.contains('card-popup__figure_visible')) {
         e.preventDefault();
     } else {
         overlay.classList.toggle('overlay_visible');
@@ -139,9 +139,13 @@ function createCard(card) {
     });
 
     cardImage.addEventListener('click', () => {
-        popImage.src = `${card.link}`;
-        popTitle.textContent = card.name;
-        togglePopHandler();
+        if (profileModal.classList.contains('modal_visible') || imageModal.classList.contains('modal_visible')) {
+            e.preventDefault();
+        } else {
+            popImage.src = `${card.link}`;
+            popTitle.textContent = card.name;
+            togglePopHandler();
+        }
       });
 
     return cardElement;
@@ -157,7 +161,7 @@ defaultCards.forEach((card) => {
 });
 
 
-// Create new card
+// Create new card from image modal
 imageModal.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
