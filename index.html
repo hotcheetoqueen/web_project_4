@@ -38,8 +38,14 @@
             <div class="modal__background">
                 <form action="#" class="modal__form modal__form_profile">
                 <h3 class="modal__title">Edit profile</h3>
-                    <input class="modal__input modal__input_name" type="text" placeholder="Name">
-                    <input class="modal__input modal__input_description" type="text" placeholder="About me">
+                <label>
+                    <input class="modal__input modal__input_name" type="text" placeholder="Name" minlength="2" maxlength="40" id="place-name">
+                    <span class="modal__error" id="profile-name-error"></span>
+                </label>
+                <label>
+                    <input class="modal__input modal__input_description" type="text" placeholder="About me" minlength="2" maxlength="200" id="description-name">
+                    <span class="modal__error" id="profile-description-error"></span>
+                </label>
                     <button class="modal__save-btn" type="submit">Save</button>
                 </form>
             </div>
@@ -49,8 +55,14 @@
             <div class="modal__background">
                 <form action="#" class="modal__form modal__form_image">
                 <h3 class="modal__title">New place</h3>
-                        <input class="modal__input modal__input_caption" type="text" placeholder="Title" value="" required>
+                    <label>
+                        <input class="modal__input modal__input_caption" type="text" placeholder="Title" value="" minlength="1" maxlength="100" required>
+                        <span class="modal__error" id="image-caption-error"></span>
+                    </label>
+                    <label>
                         <input class="modal__input modal__input_image-link" type="url" placeholder="Image link" value="" required>
+                        <span class="modal__error" id="iamge-link-error"></span>
+                    </label>
                         <button class="modal__save-btn modal__save-btn_create" type="submit">Create</button>
                 </form>
             </div>
