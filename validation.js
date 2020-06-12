@@ -13,6 +13,8 @@ enableValidation({
     errorClass: "modal__error_visible"
   });
 
+
+// Show, hide & check error functions
 function showError(form, input, {errorClass, inputErrorClass, validationMessage, ...rest}) {
     const error = form.querySelector('#' + input.id + '-error');
 
@@ -37,19 +39,33 @@ function checkValidation(form, input, rest) {
     }
 };
 
+const button = document.querySelector('.modal__save-btn')
+
+// Disable button
+function disableButton(){
+    if(input.value.length = 0) { 
+        button.classList.add('modal__save-btn_disabled');
+    }
+}
+
 function toggleButton(inputs, button, form, {inactiveButtonClass, ...rest}) {
-    const button = document.querySelector('.modal__save-btn')
-    const isValid = inputs.some(input) => {
+
+
+
+    const isValid = () => {
+        if (inputs.some(input)) {
         return !input.validity.valid;
-    };
+    }
+};
 
     if(isValid) {
         button.classList.remove(inactiveButtonClass);
     } else {
-        button.classList.remove(inactiveButtonClass);
+        button.classList.add(inactiveButtonClass);
     }
 };
 
+// Overall validation
 function enableValidation(formSelector, inputSelector, ...rest) {
     const forms = Array.from(formSelector);
     const inputs = Array.from(inputSelector);
@@ -57,15 +73,15 @@ function enableValidation(formSelector, inputSelector, ...rest) {
     forms.forEach(form) {
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-        });
+        })
     };
 
     inputs.forEach(input) {
         input.addEventListener('input', () => {
             checkValidation(form, input, rest);
             toggleButton(inputs, form, rest);
-        });
-    };
+        })
+    }
 };
 
 // Closing the Popup by Clicking on the overlay
