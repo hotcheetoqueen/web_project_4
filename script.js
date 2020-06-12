@@ -61,6 +61,8 @@ const popClose = document.querySelector('.card-popup__close');
 const popImage = document.querySelector('.card-popup__image');
 const popTitle = document.querySelector('.card-popup__caption');
 
+// const regImage = document.querySelector('.grid__photos-image');
+
 
 // Profile form handler
 const toggleHandler = (e) => {
@@ -109,9 +111,9 @@ const listWrapper = document.querySelector('.grid__photos');
 
 
 // Pop open existing images
-const togglePopHandler = (e) => {
-    overlay.classList.toggle('overlay_visible');
-    popUp.classList.toggle('card-popup__figure_visible');
+const togglePopHandler = () => {
+    // overlay.classList.toggle('overlay_visible');
+    // popUp.classList.toggle('card-popup__figure_visible');
     // e.stopImmediatePropagation();
 };
 
@@ -120,13 +122,21 @@ popClose.addEventListener('click', togglePopHandler);
 
 
 overlay.addEventListener('click', (e) => {
-    overlay.classList.remove('overlay_visible');
+    overlay.classList.toggle('overlay_visible');
     profileModal.classList.remove('modal_visible');
     imageModal.classList.remove('modal_visible');
-    // popUp.classList.remove('card-popup__figure_visible');
+    popUp.classList.toggle('card-popup__figure_visible');
     // e.stopImmediatePropagation();
 });
 
+window.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        overlay.classList.remove('overlay_visible');
+        profileModal.classList.remove('modal_visible');
+        imageModal.classList.remove('modal_visible');
+        popUp.classList.remove('card-popup__figure_visible');
+    }
+  })
 
 // Create new user generated cards
 function createCard(card) {
