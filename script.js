@@ -73,11 +73,11 @@ const toggleHandler = (e) => {
         nameInput.value = userName.textContent;
         jobInput.value = userJob.textContent;
     }
+    e.stopImmediatePropagation();
 };
 
 profileFormOpen.addEventListener('click', toggleHandler);
 profileFormClose.addEventListener('click', toggleHandler);
-
 
 profileForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -97,11 +97,11 @@ const toggleImgHandler = (e) => {
         overlay.classList.toggle('overlay_visible');
         imageModal.classList.toggle('modal_visible');
     }
+    e.stopImmediatePropagation();
 };
 
 imageFormOpen.addEventListener('click', toggleImgHandler);
 imageFormClose.addEventListener('click', toggleImgHandler);
-
 
 // Initial function to create gallery
 const cardTemplate = document.querySelector('.grid__card-template').content.querySelector('.grid__photos-item');
@@ -109,13 +109,23 @@ const listWrapper = document.querySelector('.grid__photos');
 
 
 // Pop open existing images
-const togglePopHandler = () => {
+const togglePopHandler = (e) => {
     overlay.classList.toggle('overlay_visible');
     popUp.classList.toggle('card-popup__figure_visible');
+    // e.stopImmediatePropagation();
 };
 
 popTemp.addEventListener('click', togglePopHandler);
 popClose.addEventListener('click', togglePopHandler);
+
+
+overlay.addEventListener('click', (e) => {
+    overlay.classList.remove('overlay_visible');
+    profileModal.classList.remove('modal_visible');
+    imageModal.classList.remove('modal_visible');
+    // popUp.classList.remove('card-popup__figure_visible');
+    // e.stopImmediatePropagation();
+});
 
 
 // Create new user generated cards

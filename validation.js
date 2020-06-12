@@ -1,22 +1,22 @@
 const form = document.querySelector('.modal__form');
-const input = documentSelector('.modal__input');
+const input = document.querySelector('.modal__input');
 
 // enabling validation by calling enableValidation()
 // pass all the settings on call
 
-enableValidation({
-    formSelector: ".modal__form",
-    inputSelector: ".modal__input",
-    submitButtonSelector: ".modal__save-btn",
-    inactiveButtonClass: "modal__save-btn_disabled",
-    inputErrorClass: "modal__input_error",
-    errorClass: "modal__error_visible"
-  });
+// enableValidation({
+//     formSelector: ".modal__form",
+//     inputSelector: ".modal__input",
+//     submitButtonSelector: ".modal__save-btn",
+//     inactiveButtonClass: "modal__save-btn_disabled",
+//     inputErrorClass: "modal__input_error",
+//     errorClass: "modal__error_visible"
+//   });
 
 
 // Show, hide & check error functions
 function showError(form, input, {errorClass, inputErrorClass, validationMessage, ...rest}) {
-    const error = form.querySelector('#' + input.id + '-error');
+    const error = form.querySelector(`#${input.id}`);
 
     error.classList.add(rest.errorClass);
     input.classList.add(rest.inputErrorClass);
@@ -50,8 +50,6 @@ function disableButton(){
 
 function toggleButton(inputs, button, form, {inactiveButtonClass, ...rest}) {
 
-
-
     const isValid = () => {
         if (inputs.some(input)) {
         return !input.validity.valid;
@@ -70,18 +68,18 @@ function enableValidation(formSelector, inputSelector, ...rest) {
     const forms = Array.from(formSelector);
     const inputs = Array.from(inputSelector);
 
-    forms.forEach(form) {
-        form.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        })
-    };
+    // forms.forEach(form) {
+    //     form.addEventListener('submit', (evt) => {
+    //         evt.preventDefault();
+    //     })
+    // };
 
-    inputs.forEach(input) {
-        input.addEventListener('input', () => {
-            checkValidation(form, input, rest);
-            toggleButton(inputs, form, rest);
-        })
-    }
+    // inputs.forEach(input) {
+    //     input.addEventListener('input', () => {
+    //         checkValidation(form, input, rest);
+    //         toggleButton(inputs, form, rest);
+    //     })
+    // }
 };
 
 // Closing the Popup by Clicking on the overlay

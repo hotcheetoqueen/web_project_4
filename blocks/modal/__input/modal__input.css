@@ -8,6 +8,10 @@
     border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
+.modal__input_error {
+    border-bottom-color: red;
+}
+
 @media screen and (max-width: 320px) {
     .modal__input {
         width: 200px;
