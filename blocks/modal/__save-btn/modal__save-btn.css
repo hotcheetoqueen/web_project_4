@@ -29,6 +29,14 @@
     border-radius: 2px;
 }
 
+.modal__save-btn_disabled:hover {
+    color: rgba(0, 0, 0, .2);
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, .2);
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
 @media screen and (max-width: 320px) {
     .modal__save-btn {
         width: 205px;

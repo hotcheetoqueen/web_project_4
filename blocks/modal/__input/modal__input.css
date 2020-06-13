@@ -10,6 +10,7 @@
 
 .modal__input_error {
     border-bottom-color: red;
+    opacity: 1;
 }
 
 @media screen and (max-width: 320px) {

@@ -28,13 +28,6 @@
                 <ul class="grid__photos">
                 </ul>
             </section>
-            <section class="card-popup">
-                <figure class="card-popup__figure">
-                    <button class="card-popup__close"></button>
-                    <img class="card-popup__image" src="">
-                    <figcaption class="card-popup__caption"></figcaption>
-                </figure>
-            </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Around the U.S.</p>
@@ -43,7 +36,7 @@
         <section class="modal modal_profile">
             <button class="modal__close modal__close_profile"></button>
             <div class="modal__background">
-                <form action="#" class="modal__form modal__form_profile">
+                <form action="#" class="modal__form modal__form_profile" novalidate>
                 <h3 class="modal__title">Edit profile</h3>
                 <label>
                     <input class="modal__input modal__input_name" type="text" placeholder="Name" minlength="2" maxlength="40" id="place-name">
@@ -60,7 +53,7 @@
         <section class="modal modal_image">
             <button class="modal__close modal__close_image"></button>
             <div class="modal__background">
-                <form action="#" class="modal__form modal__form_image">
+                <form action="#" class="modal__form modal__form_image" novalidate>
                 <h3 class="modal__title">New place</h3>
                     <label>
                         <input class="modal__input modal__input_caption" type="text" placeholder="Title" value="" minlength="1" maxlength="100" required>
@@ -73,6 +66,13 @@
                         <button class="modal__save-btn modal__save-btn_create" type="submit">Create</button>
                 </form>
             </div>
+        </section>
+        <section class="card-popup">
+            <figure class="card-popup__figure">
+                <button class="card-popup__close"></button>
+                <img class="card-popup__image" src="">
+                <figcaption class="card-popup__caption"></figcaption>
+            </figure>
         </section>
         <template class="grid__card-template">
             <li class="grid__photos-item">
@@ -87,6 +87,6 @@
             </li>
         </template>
         <script src="./script.js"></script>
-        <!-- <script src="./validation.js"></script> -->
+        <script src="./validation.js"></script>
     </body>
 </html>

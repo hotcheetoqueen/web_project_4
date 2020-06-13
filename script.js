@@ -112,20 +112,25 @@ const listWrapper = document.querySelector('.grid__photos');
 
 // Pop open existing images
 const togglePopHandler = (e) => {
-    overlay.classList.toggle('overlay_visible');
-    popUp.classList.toggle('card-popup__figure_visible');
-    e.stopPropagation();
+    if (profileModal.classList.contains('modal_visible') || imageModal.classList.contains('modal_visible')) {
+        e.preventDefault();
+    } else {
+        overlay.classList.toggle('overlay_visible');
+        popUp.classList.toggle('card-popup__figure_visible');
+    }
+    e.stopImmediatePropagation();
 };
 
 popTemp.addEventListener('click', togglePopHandler);
 popClose.addEventListener('click', togglePopHandler);
 
-overlay.addEventListener('click', (e) => {
-    overlay.classList.remove('overlay_visible');
-    profileModal.classList.remove('modal_visible');
-    imageModal.classList.remove('modal_visible');
-    // popUp.classList.remove('card-popup__figure_visible');
-    e.stopPropagation();
+overlay.addEventListener('click', (event) => {
+    // if (!event.target.matches('grid__photos-item')) {
+        overlay.classList.remove('overlay_visible');
+        profileModal.classList.remove('modal_visible');
+        imageModal.classList.remove('modal_visible');
+        popUp.classList.remove('card-popup__figure_visible');
+    // }
 });
 
 window.addEventListener('keydown', function (event) {
@@ -157,14 +162,10 @@ function createCard(card) {
         cardElement.remove();
     });
 
-    cardImage.addEventListener('click', (e) => {
-        if (profileModal.classList.contains('modal_visible') || imageModal.classList.contains('modal_visible')) {
-            e.preventDefault();
-        } else {
+    cardImage.addEventListener('click', () => {
             popImage.src = `${card.link}`;
             popTitle.textContent = card.name;
             togglePopHandler();
-        }
       });
 
     return cardElement;
