@@ -1,3 +1,5 @@
+@import url('./_disabled/modal__save-btn_disabled.css');
+
 .modal__save-btn {
     margin: 48px 36px 36.5px;
     width: 358px;
@@ -12,29 +14,13 @@
     text-align: center;
 }
 
-.modal__save-btn:hover {
+.modal__save-btn:hover:enabled {
     background: rgba(0, 0, 0, .8);
     cursor: pointer;
 }
 
 .modal__save-btn:focus {
     outline: none;
-}
-
-.modal__save-btn_disabled {
-    color: rgba(0, 0, 0, .2);
-    background-color: transparent;
-    border: 1px solid rgba(0, 0, 0, .2);
-    box-sizing: border-box;
-    border-radius: 2px;
-}
-
-.modal__save-btn_disabled:hover {
-    color: rgba(0, 0, 0, .2);
-    background-color: transparent;
-    border: 1px solid rgba(0, 0, 0, .2);
-    box-sizing: border-box;
-    border-radius: 2px;
 }
 
 @media screen and (max-width: 320px) {

@@ -1,3 +1,4 @@
  .modal__error_active {
+    visibility: visble;
     opacity: 1;
   }
