@@ -124,8 +124,8 @@ overlay.addEventListener('click', (e) => {
     overlay.classList.remove('overlay_visible');
     profileModal.classList.remove('modal_visible');
     imageModal.classList.remove('modal_visible');
-    popUp.classList.remove('card-popup__figure_visible');
-    // e.stopPropagation();
+    // popUp.classList.remove('card-popup__figure_visible');
+    e.stopPropagation();
 });
 
 window.addEventListener('keydown', function (event) {
