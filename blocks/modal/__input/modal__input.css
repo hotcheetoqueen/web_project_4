@@ -1,3 +1,6 @@
+@import url('./-error/modal__input-error.css');
+@import url('./_disabled/modal__input_disabled.css');
+
 .modal__input {
     margin: 54px 36px 0;
     font-size: 14px;

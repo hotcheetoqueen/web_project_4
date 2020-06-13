@@ -6,10 +6,10 @@ const validateObject = {
   formSelector: '.modal__form',
   inputSelector: '.modal__input',
   submitButtonSelector: '.modal__save-btn',
-  invalidInputClass: '',
+  invalidInputClass: 'modal__input_disabled',
   inactiveButtonClass: 'modal__save-btn_disabled',
-  inputErrorClass: 'modal__error',
-  errorClass: 'modal__error_active'
+  inputErrorClass: 'modal__input-error',
+  errorClass: 'modal__input-error_active'
 };
 
 // Show, hide & check error functions
@@ -17,7 +17,7 @@ function showInputError(inputElement, formElement, errorMessage) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
     errorElement.classList.add(validateObject.errorClass);
-    // inputElement.classList.add(validateObject.inputErrorClass);
+    inputElement.classList.add(validateObject.invalidInputClass);
     errorElement.textContent = errorMessage;
 }
 
@@ -25,7 +25,7 @@ function hideInputError(inputElement, formElement) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
     errorElement.classList.remove(validateObject.errorClass);
-    // inputElement.classList.remove(validateObject.inputErrorClass);
+    inputElement.classList.remove(validateObject.invalidInputClass);
     errorElement.textContent = '';
 }
 
@@ -67,7 +67,7 @@ function checkInputValidity(formElement, inputElement, validateObject) {
   
   const inputList = Array.from(formElement.querySelectorAll(validateObject.inputSelector));
 
-  
+
   function setEventListeners(formElement, inputList, buttonElement, validateObject) {
     const buttonElement = formElement.querySelector(validateObject.submitButtonSelector);
     

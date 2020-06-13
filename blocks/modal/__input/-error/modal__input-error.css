@@ -1,6 +1,6 @@
-@import url('./_active/modal__error_active.css');
+@import url('./_active/modal__input-error_active.css');
 
-.modal__error:invalid {
+.modal__input-error:invalid {
     font-size: 12px;
     line-height: 15px;
     color: #FF0000;
@@ -11,15 +11,16 @@
     height: 30px;
     padding-top: 5px;
     z-index: 2;
+    visibility: visible;
   }
 
-  .modal__error:invalid{
+  .modal__input-error:invalid{
     visibility: visible;
     opacity: 1;
   }
 
 @media screen and (max-width: 500px) {
-  .modal__error {
+  .modal__input-error {
     font-size: 8px;
     line-height: 10px;
     height: 24px;
