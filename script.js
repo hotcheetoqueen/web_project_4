@@ -111,22 +111,21 @@ const listWrapper = document.querySelector('.grid__photos');
 
 
 // Pop open existing images
-const togglePopHandler = () => {
-    // overlay.classList.toggle('overlay_visible');
-    // popUp.classList.toggle('card-popup__figure_visible');
-    // e.stopImmediatePropagation();
+const togglePopHandler = (e) => {
+    overlay.classList.toggle('overlay_visible');
+    popUp.classList.toggle('card-popup__figure_visible');
+    e.stopPropagation();
 };
 
 popTemp.addEventListener('click', togglePopHandler);
 popClose.addEventListener('click', togglePopHandler);
 
-
 overlay.addEventListener('click', (e) => {
-    overlay.classList.toggle('overlay_visible');
+    // overlay.classList.remove('overlay_visible');
     profileModal.classList.remove('modal_visible');
     imageModal.classList.remove('modal_visible');
-    popUp.classList.toggle('card-popup__figure_visible');
-    // e.stopImmediatePropagation();
+    // popUp.classList.remove('card-popup__figure_visible');
+    e.stopPropagation();
 });
 
 window.addEventListener('keydown', function (event) {
