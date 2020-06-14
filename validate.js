@@ -8,31 +8,41 @@ const validateObject = {
   errorClass: 'modal__input_error_active'
 };
 
+// const formElement = document.querySelector(".modal");
+// const input = formElement.querySelector(".modal__input");
+
 // Show & hide errors
 function showInputError(formElement, input, errorMessage) {
     const error = formElement.querySelector(`#${input.id}-error`);
 
-    error.classList.add(validateObject.errorClass);
-    input.classList.add(validateObject.inputErrorClass);
+    error.classList.add(formElement.errorClass);
+    input.classList.add(formElement.inputErrorClass);
     error.textContent = errorMessage;
+    console.log('showInputError working');
 }
 
 function hideInputError(formElement, input) {
   const error = formElement.querySelector(`#${input.id}-error`);
 
-    error.classList.remove(validateObject.errorClass);
-    input.classList.remove(validateObject.inputErrorClass);
+    error.classList.remove(formElement.errorClass);
+    input.classList.remove(formElement.inputErrorClass);
     error.textContent = "";
+    console.log('hideInputError working');
 }
 
 // Check input validity
 function checkInputValidity(formElement, input) {
-    if(input.validity.valid) {
+    if (input.validity.valid) {
       hideInputError(formElement, input);
+      console.log('hideInputError validity check working');
     } else {
       showInputError(formElement, input, input.validationMessage);
+      console.log('showInputError validity check working');
     }
 }
+
+const button = Array.from(document.querySelectorAll(validateObject.submitButtonSelector));
+const inputList = Array.from(document.querySelectorAll(validateObject.inputSelector));
   
   const isInvalid = inputList.some((input) => {
     return !input.validity.valid;
@@ -51,9 +61,7 @@ function checkInputValidity(formElement, input) {
 
   // Validation listeners
   function setEventListeners(formElement) {
-  const button = Array.from(document.querySelectorAll(formElement.submitButtonSelector));
-  const inputList = Array.from(document.querySelectorAll(formElement.inputSelector));
-  
+
     inputList.forEach((input) => {
         input.addEventListener('input',  () => {
           checkInputValidity(formElement, input);
