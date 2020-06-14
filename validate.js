@@ -8,8 +8,8 @@ const validateObject = {
   errorClass: 'modal__input_error_active'
 };
 
-// const formElement = document.querySelector(".modal");
-// const input = formElement.querySelector(".modal__input");
+// const formElement = document.querySelector(validateObject.formSelector);
+// const input = formElement.querySelector(validateObject.inputSelector);
 
 // Show & hide errors
 function showInputError(formElement, input, errorMessage) {
@@ -18,7 +18,6 @@ function showInputError(formElement, input, errorMessage) {
     error.classList.add(formElement.errorClass);
     input.classList.add(formElement.inputErrorClass);
     error.textContent = errorMessage;
-    console.log('showInputError working');
 }
 
 function hideInputError(formElement, input) {
@@ -27,17 +26,14 @@ function hideInputError(formElement, input) {
     error.classList.remove(formElement.errorClass);
     input.classList.remove(formElement.inputErrorClass);
     error.textContent = "";
-    console.log('hideInputError working');
 }
 
 // Check input validity
 function checkInputValidity(formElement, input) {
     if (input.validity.valid) {
       hideInputError(formElement, input);
-      console.log('hideInputError validity check working');
     } else {
       showInputError(formElement, input, input.validationMessage);
-      console.log('showInputError validity check working');
     }
 }
 
