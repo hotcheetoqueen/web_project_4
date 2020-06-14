@@ -5,6 +5,7 @@
     width: 430px;
     height: 330px;
     position: relative;
+    padding-bottom: 36px;
 }
 
 @media screen and (max-width: 320px) {
