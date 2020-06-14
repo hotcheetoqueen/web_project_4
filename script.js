@@ -123,7 +123,7 @@ const togglePopHandler = (e) => {
 popTemp.addEventListener('click', togglePopHandler);
 popClose.addEventListener('click', togglePopHandler);
 
-overlay.addEventListener('click', (event) => {
+overlay.addEventListener('click', () => {
         overlay.classList.remove('overlay_visible');
         profileModal.classList.remove('modal_visible');
         imageModal.classList.remove('modal_visible');
@@ -131,14 +131,14 @@ overlay.addEventListener('click', (event) => {
 });
     
 
-window.addEventListener('keydown', function (event) {
+window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         overlay.classList.remove('overlay_visible');
         profileModal.classList.remove('modal_visible');
         imageModal.classList.remove('modal_visible');
         popUp.classList.remove('card-popup__figure_visible');
     }
-  })
+  });
 
 // Create new user generated cards
 function createCard(card) {
