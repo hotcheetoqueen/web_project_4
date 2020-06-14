@@ -6,8 +6,9 @@
     color: #FF0000;
     height: 30px;
     padding-top: 5px;
+    visibility: visible;
     /* margin-left: 36px; */
-    opacity: 0;
+    /* opacity: 0; */
   }
 
 @media screen and (max-width: 500px) {

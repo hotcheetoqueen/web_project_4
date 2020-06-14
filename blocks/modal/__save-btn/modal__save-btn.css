@@ -14,7 +14,7 @@
     text-align: center;
 }
 
-.modal__save-btn:hover:enabled {
+.modal__save-btn:hover {
     background: rgba(0, 0, 0, .8);
     cursor: pointer;
 }
