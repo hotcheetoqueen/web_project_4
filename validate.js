@@ -3,7 +3,7 @@ const validateObject = {
   inputSelector: '.modal__input',
   submitButtonSelector: '.modal__save-btn',
   invalidInputClass: 'modal__input_disabled',
-  inactivebuttonElemClass: 'modal__save-btn_disabled',
+  inactiveButtonClass: 'modal__save-btn_disabled',
   inputErrorClass: 'modal__input_error',
   errorClass: 'modal__input_error_active'
 };
@@ -44,27 +44,27 @@ const isInvalid = (inputList) => {
 };
 
 // Disable buttonElem
-const togglebuttonElem = (inputList, buttonElem) => {
+const toggleButtonElem = (inputList, buttonElem) => {
   if (isInvalid(inputList)) {
-    buttonElem.classList.add(validateObject.inactivebuttonElemClass);
+    buttonElem.classList.add(validateObject.inactiveButtonClass);
     buttonElem.disabled = true;
   } else {
-    buttonElem.classList.remove(validateObject.inactivebuttonElemClass);
+    buttonElem.classList.remove(validateObject.inactiveButtonClass);
     buttonElem.disabled = false;
   }
 };
 
 // Validation listeners
-function setEventListeners(formElement) {
-  const inputList = Array.from(document.querySelectorAll(validateObject.inputSelector));
-  const buttonElem = document.querySelectorAll(validateObject.submitButtonSelector);
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(validateObject.inputSelector));
+  const buttonElem = formElement.querySelector(validateObject.submitButtonSelector);
 
-  // togglebuttonElem(inputList, buttonElem);
+  toggleButtonElem(inputList, buttonElem);
 
   inputList.forEach((input) => {
       input.addEventListener('input',  () => {
         checkInputValidity(formElement, input);
-        togglebuttonElem(inputList, buttonElem);
+        toggleButtonElem(inputList, buttonElem);
       });
     });
   };
@@ -79,12 +79,5 @@ function enableValidation(form) {
         setEventListeners(formElement);
       });
 }
-
-//         const fieldsetList = Array.from(formElement.querySelectorAll(".form__fields"));
-//         fieldsetList.forEach((fieldset) => {
-//           setEventListeners(fieldset);
-//         });
-//       });
-// };
 
 enableValidation(validateObject);
