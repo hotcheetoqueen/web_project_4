@@ -10,7 +10,7 @@ const validateObject = {
 
 // Show & hide errors
 function showInputError(form, input, validationMessage) {
-    const error = form.querySelector(`#${input.id}_error`);
+    const error = form.querySelector(`#${input.id}-error`);
 
     error.classList.add(validateObject.errorClass);
     input.classList.add(validateObject.inputErrorClass);
@@ -18,7 +18,7 @@ function showInputError(form, input, validationMessage) {
 }
 
 function hideInputError(input, form) {
-  const error = form.querySelector(`#${input.id}_error`);
+  const error = form.querySelector(`#${input.id}-error`);
 
     error.classList.remove(validateObject.errorClass);
     input.classList.remove(validateObject.invalidInputClass);
