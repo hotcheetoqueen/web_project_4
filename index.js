@@ -192,3 +192,5 @@ imageModal.addEventListener('submit', (evt) => {
     setCard(newCard);
     toggleImgHandler();
 });
+
+// TO DO import Card & FormValidator modules + implement
