@@ -1,3 +1,26 @@
+import FormValidator from './FormValidator.js';
+
+const defaultConfig = {
+    inputSelector: '.modal__input',
+    submitButtonSelector: '.modal__save-btn',
+    invalidInputClass: 'modal__input_disabled',
+    inactiveButtonClass: 'modal__save-btn_disabled',
+    inputErrorClass: 'modal__input_error',
+    errorClass: 'modal__input_error_active'
+};
+
+// Modal forms
+const profileForm = document.querySelector('.modal__form_profile');
+const profileModal = document.querySelector('.modal_profile');
+const imageModal = document.querySelector('.modal_image');
+
+const profileFormValidation = new FormValidator(defaultConfig, profileModal);
+const imageFormValidation = new FormValidator(defaultConfig, imageModal);
+
+profileFormValidation.enableValidation();
+imageFormValidation.enableValidation();
+
+
 // Initial images
 const defaultCards = [
     {
@@ -35,12 +58,6 @@ const imageFormClose = document.querySelector('.modal__close_image');
 
 const overlay = document.querySelector('.overlay');
 
-// Modal forms
-const profileForm = document.querySelector('.modal__form_profile');
-const profileModal = document.querySelector('.modal_profile');
-
-const imageModal = document.querySelector('.modal_image');
-
 // Profile form data
 const userName = document.querySelector('.profile__info_name');
 const nameInput = document.querySelector('.modal__input_name');
@@ -60,8 +77,6 @@ const popClose = document.querySelector('.card-popup__close');
 
 const popImage = document.querySelector('.card-popup__image');
 const popTitle = document.querySelector('.card-popup__caption');
-
-// const regImage = document.querySelector('.grid__photos-image');
 
 
 // Profile form handler
@@ -192,5 +207,3 @@ imageModal.addEventListener('submit', (evt) => {
     setCard(newCard);
     toggleImgHandler();
 });
-
-// TO DO import Card & FormValidator modules + implement
