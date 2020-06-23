@@ -20,16 +20,16 @@ popTemp.addEventListener('click', togglePopHandler);
 popClose.addEventListener('click', togglePopHandler);
 
 class Card {
-    constructor(data, cardTemp) {
+    constructor(data, cardTemplateSelector) {
         this._name = data.name;
         this._link = data.link;
 
-        this._cardTemp = cardTemp;
+        this._cardTemplateSelector = cardTemplateSelector;
     }
 
     _createCard() {
         const cardTemplate = document
-        .querySelector(this._cardTemp)
+        .querySelector(this._cardTemplateSelector)
         .content
         .querySelector('.grid__photos-item')
         .cloneNode(true);
