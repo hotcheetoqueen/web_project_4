@@ -116,7 +116,6 @@ imageFormClose.addEventListener('click', toggleImgHandler);
 
 // Initial function to create gallery
 const cardTemp = '.grid__card-template';
-// const cardTemplate = document.querySelector('.grid__card-template').content.querySelector('.grid__photos-item');
 const listWrapper = document.querySelector('.grid__photos');
 
 overlay.addEventListener('click', () => {
