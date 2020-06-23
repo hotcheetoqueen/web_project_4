@@ -1,10 +1,3 @@
-// TO DO
-// All code in FormValidator class and only sets settings for validating form fields
-  // Its constructor has two parameters. The first parameter is a settings object that stores selectors and form classes, and the second one takes a form element to be validated.
-  // It has private methods for processing the form, which include: checking the field's validity, changing the state of the Submit button, and adding all the needed handlers.
-  // It has one public method enableValidation(), which enables form validation.
-// Export to index.js as module
-
 class FormValidator {
     constructor(config, formElement) {
         this._formElement = formElement;

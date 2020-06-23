@@ -1,4 +1,5 @@
 import FormValidator from './FormValidator.js';
+import Card from './Card.js';
 
 const defaultConfig = {
     inputSelector: '.modal__input',
@@ -10,7 +11,6 @@ const defaultConfig = {
 };
 
 // Modal forms
-const profileForm = document.querySelector('.modal__form_profile');
 const profileModal = document.querySelector('.modal_profile');
 const imageModal = document.querySelector('.modal_image');
 
@@ -19,7 +19,6 @@ const imageFormValidation = new FormValidator(defaultConfig, imageModal);
 
 profileFormValidation.enableValidation();
 imageFormValidation.enableValidation();
-
 
 // Initial images
 const defaultCards = [
@@ -50,13 +49,14 @@ const defaultCards = [
 ];
 
 // Modal triggers
+const profileForm = document.querySelector('.modal__form_profile');
+
 const profileFormOpen = document.querySelector('.profile__edit-button');
 const profileFormClose = document.querySelector('.modal__close_profile');
 
 const imageFormOpen = document.querySelector('.profile__add-button');
 const imageFormClose = document.querySelector('.modal__close_image');
 
-const overlay = document.querySelector('.overlay');
 
 // Profile form data
 const userName = document.querySelector('.profile__info_name');
@@ -69,14 +69,8 @@ const jobInput = document.querySelector('.modal__input_description');
 const captionInput = document.querySelector('.modal__input_caption');
 const imageInput = document.querySelector('.modal__input_image-link');
 
-
-// Image pop up
-const popTemp = document.querySelector('.grid__card-template');
 const popUp = document.querySelector('.card-popup__figure');
-const popClose = document.querySelector('.card-popup__close');
-
-const popImage = document.querySelector('.card-popup__image');
-const popTitle = document.querySelector('.card-popup__caption');
+const overlay = document.querySelector('.overlay');
 
 
 // Profile form handler
@@ -121,22 +115,9 @@ imageFormOpen.addEventListener('click', toggleImgHandler);
 imageFormClose.addEventListener('click', toggleImgHandler);
 
 // Initial function to create gallery
-const cardTemplate = document.querySelector('.grid__card-template').content.querySelector('.grid__photos-item');
+const cardTemp = '.grid__card-template';
+// const cardTemplate = document.querySelector('.grid__card-template').content.querySelector('.grid__photos-item');
 const listWrapper = document.querySelector('.grid__photos');
-
-
-// Pop open existing images
-const togglePopHandler = (e) => {
-    if (profileModal.classList.contains('modal_visible') || imageModal.classList.contains('modal_visible')) {
-        e.preventDefault();
-    } else {
-        overlay.classList.toggle('overlay_visible');
-        popUp.classList.toggle('card-popup__figure_visible');
-    }
-};
-
-popTemp.addEventListener('click', togglePopHandler);
-popClose.addEventListener('click', togglePopHandler);
 
 overlay.addEventListener('click', () => {
         overlay.classList.remove('overlay_visible');
@@ -155,39 +136,11 @@ window.addEventListener('keydown', (event) => {
     }
   });
 
-// Create new user generated cards
-function createCard(card) {
-    const cardElement = cardTemplate.cloneNode(true);
 
-    const cardImage = cardElement.querySelector('.grid__photos-image');
-    const cardTitle = cardElement.querySelector('.grid__photos-caption');
-    const cardLikeButton = cardElement.querySelector('.grid__photos-liker');
-    const cardDeleteButton = cardElement.querySelector('.grid__photos-delete');
+function setCard(data) {
+    const card = new Card(data, cardTemp);
 
-    cardTitle.textContent = card.name;
-    cardImage.style.backgroundImage = `url('${card.link}')`;
-
-    cardLikeButton.addEventListener('click', () => {
-        cardLikeButton.classList.toggle('grid__photos-liker_on');
-    });
-
-    cardDeleteButton.addEventListener('click', () => {
-        cardElement.remove();
-    });
-
-    cardImage.addEventListener('click', (e) => {
-            popImage.src = `${card.link}`;
-            popTitle.textContent = card.name;
-            togglePopHandler();
-            e.stopPropagation();
-      });
-
-    return cardElement;
-}
-
-
-function setCard(card) {
-    listWrapper.prepend(createCard(card));
+    listWrapper.prepend(card.getCard());
 }
 
 defaultCards.forEach((card) => {
