@@ -1,5 +1,6 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
+import { popUp, overlay, togglePopHandler, popUpCreator } from './utils.js';
 
 const defaultConfig = {
     inputSelector: '.modal__input',
@@ -69,8 +70,8 @@ const jobInput = document.querySelector('.modal__input_description');
 const captionInput = document.querySelector('.modal__input_caption');
 const imageInput = document.querySelector('.modal__input_image-link');
 
-const popUp = document.querySelector('.card-popup__figure');
-const overlay = document.querySelector('.overlay');
+// const popUp = document.querySelector('.card-popup__figure');
+// const overlay = document.querySelector('.overlay');
 
 
 // Profile form handler

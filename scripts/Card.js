@@ -1,23 +1,4 @@
-// Image pop up
-const popUp = document.querySelector('.card-popup__figure');
-const popImage = document.querySelector('.card-popup__image');
-const popTitle = document.querySelector('.card-popup__caption');
-const overlay = document.querySelector('.overlay');
-const popTemp = document.querySelector('.grid__card-template');
-const popClose = document.querySelector('.card-popup__close');
-
-
-const togglePopHandler = (e) => {
-    if (overlay.classList.contains('overlay_visible') && !popUp.classList.contains('card-popup__figure_visible')) {
-        e.preventDefault();
-    } else {
-        overlay.classList.toggle('overlay_visible');
-        popUp.classList.toggle('card-popup__figure_visible');
-    }
-};
-
-popTemp.addEventListener('click', togglePopHandler);
-popClose.addEventListener('click', togglePopHandler);
+import { popUp, overlay, togglePopHandler, popUpCreator} from './utils.js';
 
 class Card {
     constructor(data, cardTemplateSelector) {
@@ -34,10 +15,14 @@ class Card {
         .querySelector('.grid__photos-item')
         .cloneNode(true);
 
+        this._imagePop = cardTemplate
+        .querySelector('.grid__photos-image');
+
         return cardTemplate;
     }
 
     _setEventListeners() {
+//add event listener for popUp
         this._card.querySelector('.grid__photos-liker').addEventListener('click', (e) => {
             e.target.classList.toggle('grid__photos-liker_on');
         });
@@ -45,15 +30,12 @@ class Card {
         this._card.querySelector('.grid__photos-delete').addEventListener('click', () => {
             this._card.remove();
         });
-    
-        this._card.querySelector('.grid__photos-image').addEventListener('click', (e) => {
-                popImage.src = `${this._link}`;
-                popTitle.textContent = this._name;
-                togglePopHandler();
-                e.stopPropagation();
-          });
-    
-    }
+            
+        this._imagePop.addEventListener('click', (e) => {
+            popUpCreator(this._link, this._name, e);
+        }); 
+
+        }
 
     getCard() {
         this._card = this._createCard();
