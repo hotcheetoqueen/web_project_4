@@ -1,11 +1,12 @@
 import { popUp, overlay, togglePopHandler, popUpCreator} from './utils.js';
 
 class Card {
-    constructor(data, cardTemplateSelector) {
+    constructor(data, cardTemplateSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
 
         this._cardTemplateSelector = cardTemplateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _createCard() {
@@ -33,6 +34,7 @@ class Card {
             
         this._imagePop.addEventListener('click', (e) => {
             popUpCreator(this._link, this._name, e);
+            this._handleCardClick();
         }); 
 
         }

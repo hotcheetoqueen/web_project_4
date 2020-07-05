@@ -1,6 +1,9 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
+// import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
 import { popUp, overlay, togglePopHandler, popUpCreator } from './utils.js';
+import "../pages/index.css";
 
 const defaultConfig = {
     inputSelector: '.modal__input',
@@ -73,6 +76,7 @@ const imageInput = document.querySelector('.modal__input_image-link');
 // const popUp = document.querySelector('.card-popup__figure');
 // const overlay = document.querySelector('.overlay');
 
+const imagePopup = new PopupWithImage('.modal_image');
 
 // Profile form handler
 const toggleHandler = (e) => {
@@ -138,10 +142,12 @@ window.addEventListener('keydown', (event) => {
 
 
 function setCard(data) {
-    const card = new Card(data, cardTemplateSelector);
+    const card = new Card(data, cardTemplateSelector, () => {
+        imagePopup.open({link, name});
+    })
 
     listWrapper.prepend(card.getCard());
-}
+};
 
 defaultCards.forEach((card) => {
     setCard(card);
