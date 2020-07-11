@@ -1,6 +1,6 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-// import Popup from './Popup.js';
+import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import { popUp, overlay, togglePopHandler, popUpCreator } from './utils.js';
 import "../pages/index.css";
