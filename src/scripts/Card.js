@@ -1,6 +1,6 @@
-import { popUp, overlay, togglePopHandler, popUpCreator} from './utils.js';
+import { popUpCreator} from './utils.js';
 
-class Card {
+export default class Card {
     constructor(data, cardTemplateSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
@@ -23,7 +23,6 @@ class Card {
     }
 
     _setEventListeners() {
-//add event listener for popUp
         this._card.querySelector('.grid__photos-liker').addEventListener('click', (e) => {
             e.target.classList.toggle('grid__photos-liker_on');
         });
@@ -50,5 +49,3 @@ class Card {
         return this._card;
         }
     }
-
-export default Card;
