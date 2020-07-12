@@ -16,6 +16,7 @@ export const imageFormOpen = document.querySelector('.profile__add-button');
 export const imageFormClose = document.querySelector('.modal__close_image');
 
 
+
 // Profile form data
 export const userName = document.querySelector('.profile__info_name');
 export const nameInput = document.querySelector('.modal__input_name');
@@ -28,7 +29,7 @@ export const captionInput = document.querySelector('.modal__input_caption');
 export const imageInput = document.querySelector('.modal__input_image-link');
 
 
-// Poopup functions
+// Popup functions
 export function togglePopHandler(e) {
 
     if (overlay.classList.contains('overlay_visible') && !popUp.classList.contains('card-popup__figure_visible')) {
