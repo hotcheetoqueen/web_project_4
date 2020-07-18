@@ -10,10 +10,6 @@ import UserInfo from './UserInfo.js';
 import { 
         popUp, 
         overlay, 
-        togglePopHandler, 
-        popUpCreator, 
-        popTemp, 
-        popClose, 
         defaultCards, 
         defaultConfig, 
         imageModal, 
@@ -112,15 +108,15 @@ overlay.addEventListener('click', () => {
 });
     
 
-// window.addEventListener('keydown', (event) => {
-//     // close();
-//     // if (event.key === 'Escape') {
-//     //     overlay.classList.remove('overlay_visible');
-//     //     profileModal.classList.remove('modal_visible');
-//     //     imageModal.classList.remove('modal_visible');
-//     //     popUp.classList.remove('card-popup__figure_visible');
-//     // }
-//   });
+window.addEventListener('keydown', (event) => {
+    close();
+    if (event.key === 'Escape') {
+        overlay.classList.remove('overlay_visible');
+        profileModal.classList.remove('modal_visible');
+        imageModal.classList.remove('modal_visible');
+        popUp.classList.remove('card-popup__figure_visible');
+    }
+  });
 
 
 function setCard(data) {
