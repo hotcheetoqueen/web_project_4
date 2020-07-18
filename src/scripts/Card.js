@@ -29,6 +29,7 @@ export default class Card {
     
         this._card.querySelector('.grid__photos-delete').addEventListener('click', () => {
             this._card.remove();
+            this._card = null;
         });
             
         this._imagePop.addEventListener('click', (e) => {
