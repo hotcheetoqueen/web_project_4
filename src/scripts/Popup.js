@@ -1,3 +1,5 @@
+import popClose from './utils';
+
 export default class Popup {
     constructor(popupSelector, popupOverlay) {
         this._popupSelector = popupSelector;
@@ -17,11 +19,11 @@ export default class Popup {
             this._popupOverlay.classList.remove('overlay_visible');
             this._popupSelector.classList.remove('card-popup__figure_visible');
 
-            document.addEventListener('keyup', this._handleEscClose);
+            document.removeEventListener('keyup', this._handleEscClose);
         }
 
         _handleEscClose() {
-            if(event.key === 'Escape') {
+            if(event.key === '27') {
                 this.close();
             }
         }
