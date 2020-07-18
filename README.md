@@ -1,6 +1,6 @@
 # Project 4, Sprint 8: Around The U.S.
 
-[Check it out here](https://hcqpersonal.github.io/web_project_4/)
+[Check it out here](https://hcqpersonal.github.io/web_project_4/dist)
 
 **Tech Stack**
 HTML | CSS | JavaScript
