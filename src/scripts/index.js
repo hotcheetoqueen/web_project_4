@@ -2,23 +2,22 @@ import "../pages/index.css";
 
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-// import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import Section from './Section.js';
 import UserInfo from './UserInfo.js';
-import { 
-        popUp, 
-        overlay, 
-        defaultCards, 
-        defaultConfig, 
-        imageModal, 
-        profileModal, 
-        profileForm,
-        profileFormOpen,
-        profileFormClose,
-        imageFormOpen, 
-        imageFormClose,
+import {         
+    popUp, 
+    overlay, 
+    defaultCards, 
+    defaultConfig, 
+    imageModal, 
+    profileModal, 
+    profileForm,
+    profileFormOpen,
+    profileFormClose,
+    imageFormOpen, 
+    imageFormClose,
         userName,
         nameInput,
         userJob,
@@ -27,23 +26,18 @@ import {
         imageInput,
     } from './utils.js';
 
+// const userData = new UserInfo({ nameSelector, jobSelector });
 
-const popupImage = new PopupWithImage('.modal_image');
-popupImage.setEventListeners();
-
-// Validation
-const profileFormValidation = new FormValidator(defaultConfig, profileModal);
-const imageFormValidation = new FormValidator(defaultConfig, imageModal);
-profileFormValidation.enableValidation();
-imageFormValidation.enableValidation();
-
-// Profile form handler
 const editPopup = new PopupWithForm(".modal__form_profile", toggleHandler);
 const addPopup = new PopupWithForm(".modal__form_image", toggleImgHandler);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 
-  
+
+// function toggleHandler({ "user-name": name, "user-caption": job }) {
+//     userData.setUserInfo({ name, about });
+// }
+
 const toggleHandler = (e) => {
 
     if (imageModal.classList.contains('modal_visible') || popUp.classList.contains('card-popup__figure_visible')) {
@@ -65,24 +59,22 @@ profileFormOpen.addEventListener('click', () => {
 
 profileFormOpen.addEventListener('click', toggleHandler);
 profileFormClose.addEventListener('click', toggleHandler);
-
-    // const userData = new UserInfo({
-    //     nameSelector: userName,
-    //     jobSelector: userJob,
-    //   });
-
-profileForm.addEventListener('submit', (evt) => {
+    
+profileForm.addEventListener('click', () => {
     evt.preventDefault();
 
-            // userData.setUserInfo(values);
+    // const userInput = userInput.getUserInfo();
+
     userName.textContent = nameInput.value;
     userJob.textContent = jobInput.value;
 
+    // nameInput.value = userInput.name;
+    // jobInput.value = userInput.job;
+
     toggleHandler();
 });
-
-
 // Photos form handler
+
 const toggleImgHandler = (e) => {
     if (profileModal.classList.contains('modal_visible') || popUp.classList.contains('card-popup__figure_visible')) {
     } else {
@@ -93,14 +85,29 @@ const toggleImgHandler = (e) => {
 };
 
 imageFormOpen.addEventListener('click', toggleImgHandler);
-imageFormClose.addEventListener('click', toggleImgHandler);
+imageFormClose.addEventListener('click', toggleImgHandler)
 
-// Initial function to create gallery
-const cardTemplateSelector = '.grid__card-template';
-const listWrapper = document.querySelector('.grid__photos');
+// Validation
+const profileFormValidation = new FormValidator(defaultConfig, profileModal);
+const imageFormValidation = new FormValidator(defaultConfig, imageModal);
+profileFormValidation.enableValidation();
+imageFormValidation.enableValidation();
+
+
+// Create new card from image modal
+imageModal.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const cardInfo = {
+        name: captionInput.value,
+        link: imageInput.value
+    };
+
+    setCard(cardInfo);
+    toggleImgHandler();
+});
 
 overlay.addEventListener('click', () => {
-    // close();
         overlay.classList.remove('overlay_visible');
         profileModal.classList.remove('modal_visible');
         imageModal.classList.remove('modal_visible');
@@ -118,6 +125,9 @@ window.addEventListener('keydown', (event) => {
     }
   });
 
+// New instances
+const cardTemplateSelector = '.grid__card-template';
+const listWrapper = document.querySelector('.grid__photos');
 
 function setCard(data) {
     const card = new Card(data, cardTemplateSelector, () => {
@@ -130,7 +140,6 @@ function setCard(data) {
 defaultCards.forEach((card) => {
     setCard(card);
 });
-
 
 // Create new card from image modal
 imageModal.addEventListener('submit', (evt) => {
@@ -152,7 +161,6 @@ for (const card of initialCards) {
   newCard = newCard.generateCard();
   cards.push(newCard);
 }
-
 const cardList = new Section(
   {
     items: cards,
@@ -165,7 +173,22 @@ const cardList = new Section(
 
 cardList.renderItems();
 
-// // Modal handling
-// export function handleCardClick(name, link) {
-//     popupImage.open(name, link);
-//   }
+
+// Image modal popup
+function cardSubmitHandler({ "card-caption": caption, "card-link": link }) {
+    cardsList.addItems(newCard({ caption, link }));
+  }
+  
+const imgPopup = new PopupWithForm(imageModal, cardSubmitHandler);
+imageFormOpen.addEventListener("click", () => cardPopup.open());
+imgPopup.setEventListeners();
+
+
+// // Image expand
+const popupImage = new PopupWithImage('.modal_image');
+popupImage.setEventListeners();
+
+function handleCardClick() {
+    // popupImage.open(data);
+    toggleImgHandler();
+}

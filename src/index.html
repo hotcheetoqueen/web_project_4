@@ -39,11 +39,11 @@
                 <h3 class="modal__title">Edit profile</h3>
                     <fieldset class="modal__fieldset">
                     <label>
-                        <input class="modal__input modal__input_name" type="text" placeholder="Name" minlength="2" maxlength="40" id="profile-name">
+                        <input class="modal__input modal__input_name" name="user-name" type="text" placeholder="Name" minlength="2" maxlength="40" id="profile-name">
                         <span class="modal__input_error" id="profile-name-error"></span>
                     </label>
                     <label>
-                        <input class="modal__input modal__input_description" type="text" placeholder="About me" minlength="2" maxlength="200" id="profile-description">
+                        <input class="modal__input modal__input_description" name="user-about" type="text" placeholder="About me" minlength="2" maxlength="200" id="profile-description">
                         <span class="modal__input_error" id="profile-description-error"></span>
                     </label>
                         <button class="modal__save-btn" type="submit">Save</button>
@@ -58,11 +58,11 @@
                 <h3 class="modal__title">New place</h3>
                     <fieldset class="modal__fieldset">
                         <label>
-                            <input class="modal__input modal__input_caption" id="image-caption" type="text" placeholder="Title" value="" minlength="1" maxlength="100" required>
+                            <input class="modal__input modal__input_caption" id="image-caption" name="card-caption" type="text" placeholder="Title" value="" minlength="1" maxlength="100" required>
                             <span class="modal__input_error" id="image-caption-error"></span>
                         </label>
                         <label>
-                            <input class="modal__input modal__input_image-link" id="image-link" type="url" placeholder="Image link" value="" required>
+                            <input class="modal__input modal__input_image-link" id="image-link" name="card-link" type="url" placeholder="Image link" value="" required>
                             <span class="modal__input_error" id="image-link-error"></span>
                         </label>
                             <button class="modal__save-btn" type="submit">Create</button>
