@@ -26,7 +26,7 @@ import {
         imageInput,
     } from './utils.js';
 
-// const userData = new UserInfo({ nameSelector, jobSelector });
+// const userData = new UserInfo({ name, job });
 
 const editPopup = new PopupWithForm(".modal__form_profile", toggleHandler);
 const addPopup = new PopupWithForm(".modal__form_image", toggleImgHandler);
@@ -95,18 +95,6 @@ imageFormValidation.enableValidation();
 
 
 // Create new card from image modal
-imageModal.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const cardInfo = {
-        name: captionInput.value,
-        link: imageInput.value
-    };
-
-    setCard(cardInfo);
-    toggleImgHandler();
-});
-
 overlay.addEventListener('click', () => {
         overlay.classList.remove('overlay_visible');
         profileModal.classList.remove('modal_visible');
@@ -115,7 +103,7 @@ overlay.addEventListener('click', () => {
 });
     
 
-window.addEventListener('keydown', (event) => {
+window.addEventListener('keydown', () => {
     close();
     if (event.key === 'Escape') {
         overlay.classList.remove('overlay_visible');
@@ -141,7 +129,8 @@ defaultCards.forEach((card) => {
     setCard(card);
 });
 
-// Create new card from image modal
+
+// Image modal listener for new card info
 imageModal.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -154,26 +143,6 @@ imageModal.addEventListener('submit', (evt) => {
     toggleImgHandler();
 });
 
-// New instances
-const cards = [];
-for (const card of initialCards) {
-  let newCard = new Card(card.name, card.link, cardSelector, handleCardClick);
-  newCard = newCard.generateCard();
-  cards.push(newCard);
-}
-const cardList = new Section(
-  {
-    items: cards,
-    renderer: (element) => {
-      cardList.addItem(element);
-    },
-  },
-  listWrapper
-);
-
-cardList.renderItems();
-
-
 // Image modal popup
 function cardSubmitHandler({ "card-caption": caption, "card-link": link }) {
     cardsList.addItems(newCard({ caption, link }));
@@ -184,11 +153,31 @@ imageFormOpen.addEventListener("click", () => cardPopup.open());
 imgPopup.setEventListeners();
 
 
+// New instances of card placement
+const cards = [];
+for (const card of defaultCards) {
+  let newCard = new Card(card.data, cardTemplateSelector, handleCardClick);
+  newCard = newCard.getCard();
+  cards.push(newCard);
+}
+
+const cardList = new Section(
+  {
+    items: cards,
+    renderer: (element) => {
+      cardList.addItem(element);
+    },
+  },
+  listWrapper
+);
+
+cardList.renderer();
+
+
 // // Image expand
 const popupImage = new PopupWithImage('.modal_image');
 popupImage.setEventListeners();
 
 function handleCardClick() {
-    // popupImage.open(data);
-    toggleImgHandler();
+    popupImage.open(data);
 }

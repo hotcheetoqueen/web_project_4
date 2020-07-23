@@ -1,9 +1,9 @@
 import { userName, userJob } from './utils.js';
 
 export default class UserInfo {
-    constructor({ nameSelector, jobSelector }) {
-        this._name.textContent = document.querySelector(nameSelector);
-        this._job.textContent = document.querySelector(jobSelector); 
+    constructor({ name, job }) {
+        this._name = document.querySelector(name);
+        this._job = document.querySelector(job); 
 }
 
     getUserInfo() {
@@ -14,7 +14,7 @@ export default class UserInfo {
     }
 
     setUserInfo() {
-        name.textContent = name; 
-        job.textContent = about; 
+        this._name.textContent = name; 
+        this._job.textContent = about; 
     }
 }
