@@ -26,66 +26,11 @@ import {
         imageInput,
     } from './utils.js';
 
-// const userData = new UserInfo({ name, job });
-
+// Form modals
 const editPopup = new PopupWithForm(".modal__form_profile", toggleHandler);
 const addPopup = new PopupWithForm(".modal__form_image", toggleImgHandler);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
-
-
-// function toggleHandler({ "user-name": name, "user-caption": job }) {
-//     userData.setUserInfo({ name, about });
-// }
-
-const toggleHandler = (e) => {
-
-    if (imageModal.classList.contains('modal_visible') || popUp.classList.contains('card-popup__figure_visible')) {
-        e.preventDefault();
-    } else {
-        overlay.classList.toggle('overlay_visible');
-        profileModal.classList.toggle('modal_visible');
-
-
-        nameInput.value = userName.textContent;
-        jobInput.value = userJob.textContent;
-    }
-    e.stopImmediatePropagation();
-};
-
-profileFormOpen.addEventListener('click', () => {
-    editPopup.open()
-});
-
-profileFormOpen.addEventListener('click', toggleHandler);
-profileFormClose.addEventListener('click', toggleHandler);
-    
-profileForm.addEventListener('click', () => {
-    evt.preventDefault();
-
-    // const userInput = userInput.getUserInfo();
-
-    userName.textContent = nameInput.value;
-    userJob.textContent = jobInput.value;
-
-    // nameInput.value = userInput.name;
-    // jobInput.value = userInput.job;
-
-    toggleHandler();
-});
-// Photos form handler
-
-const toggleImgHandler = (e) => {
-    if (profileModal.classList.contains('modal_visible') || popUp.classList.contains('card-popup__figure_visible')) {
-    } else {
-        overlay.classList.toggle('overlay_visible');
-        imageModal.classList.toggle('modal_visible');
-    }
-    e.stopImmediatePropagation();
-};
-
-imageFormOpen.addEventListener('click', toggleImgHandler);
-imageFormClose.addEventListener('click', toggleImgHandler)
 
 // Validation
 const profileFormValidation = new FormValidator(defaultConfig, profileModal);
@@ -94,41 +39,52 @@ profileFormValidation.enableValidation();
 imageFormValidation.enableValidation();
 
 
-// Create new card from image modal
-overlay.addEventListener('click', () => {
-        overlay.classList.remove('overlay_visible');
-        profileModal.classList.remove('modal_visible');
-        imageModal.classList.remove('modal_visible');
-        popUp.classList.remove('card-popup__figure_visible');
-});
-    
+// Image expand
+const popupImage = new PopupWithImage('.modal_image');
+popupImage.setEventListeners();
 
-window.addEventListener('keydown', () => {
-    close();
-    if (event.key === 'Escape') {
-        overlay.classList.remove('overlay_visible');
-        profileModal.classList.remove('modal_visible');
-        imageModal.classList.remove('modal_visible');
-        popUp.classList.remove('card-popup__figure_visible');
-    }
-  });
 
-// New instances
-const cardTemplateSelector = '.grid__card-template';
-const listWrapper = document.querySelector('.grid__photos');
+// Handlers
+const toggleHandler = (e) => {
+    overlay.classList.toggle('overlay_visible');
+    profileModal.classList.toggle('modal_visible');
 
-function setCard(data) {
-    const card = new Card(data, cardTemplateSelector, () => {
-        imagePopup.open({link, name});
-    })
+    nameInput.value = userName.textContent;
+    jobInput.value = userJob.textContent;
 
-    listWrapper.prepend(card.getCard());
+    e.stopImmediatePropagation();
 };
 
-defaultCards.forEach((card) => {
-    setCard(card);
+// profileFormOpen.addEventListener('click', () => {
+//     editPopup.open()
+// });
+
+profileFormOpen.addEventListener('click', toggleHandler);
+// profileFormClose.addEventListener('click', toggleHandler);
+    
+profileForm.addEventListener('click', (evt) => {
+    evt.preventDefault();
+
+    userName.textContent = nameInput.value; 
+    userJob.textContent = jobInput.value; 
+
+    // const userData = new UserInfo(name, job);
+    // userData.setUserInfo();
+
+    toggleHandler();
 });
 
+// Photos form handler
+
+const toggleImgHandler = (e) => {
+    overlay.classList.toggle('overlay_visible');
+    imageModal.classList.toggle('modal_visible');
+
+    e.stopImmediatePropagation();
+};
+
+imageFormOpen.addEventListener('click', toggleImgHandler);
+imageFormClose.addEventListener('click', toggleImgHandler);
 
 // Image modal listener for new card info
 imageModal.addEventListener('submit', (evt) => {
@@ -140,17 +96,45 @@ imageModal.addEventListener('submit', (evt) => {
     };
 
     setCard(cardInfo);
+
     toggleImgHandler();
 });
 
-// Image modal popup
-function cardSubmitHandler({ "card-caption": caption, "card-link": link }) {
-    cardsList.addItems(newCard({ caption, link }));
-  }
-  
-const imgPopup = new PopupWithForm(imageModal, cardSubmitHandler);
-imageFormOpen.addEventListener("click", () => cardPopup.open());
-imgPopup.setEventListeners();
+
+// Create new card from image modal
+overlay.addEventListener('click', () => {
+        overlay.classList.remove('overlay_visible');
+        profileModal.classList.remove('modal_visible');
+        imageModal.classList.remove('modal_visible');
+        popUp.classList.remove('card-popup__figure_visible');
+});
+
+window.addEventListener('keydown', () => {
+    // close();
+    if (event.key === 'Escape') {
+        overlay.classList.remove('overlay_visible');
+        profileModal.classList.remove('modal_visible');
+        imageModal.classList.remove('modal_visible');
+        popUp.classList.remove('card-popup__figure_visible');
+    }
+});
+
+
+// New instances
+const cardTemplateSelector = '.grid__card-template';
+const listWrapper = document.querySelector('.grid__photos');
+
+function setCard(data) {
+    const card = new Card(data, cardTemplateSelector, () => {
+        addPopup.open({ link, name });
+    })
+
+    listWrapper.prepend(card.getCard());
+};
+
+defaultCards.forEach((card) => {
+    setCard(card);
+});
 
 
 // New instances of card placement
@@ -171,13 +155,8 @@ const cardList = new Section(
   listWrapper
 );
 
-cardList.renderer();
+cardList.renderItems();
 
-
-// // Image expand
-const popupImage = new PopupWithImage('.modal_image');
-popupImage.setEventListeners();
-
-function handleCardClick() {
-    popupImage.open(data);
+function handleCardClick(name, link) {
+    popupImage.open(name, link);
 }

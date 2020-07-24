@@ -1,6 +1,9 @@
 import Popup from './Popup.js';
 
-export default class PopupWithImage extends Popup {
+class PopupWithImage extends Popup {
+    constructor(popupSelector) {
+        super(popupSelector);
+    }
 
     open({ link, name }) {
         const modalImageLink = this._popupElement.querySelector('.modal__input_image-link');
@@ -12,3 +15,5 @@ export default class PopupWithImage extends Popup {
         super.open();
     }
 }
+
+export default PopupWithImage;

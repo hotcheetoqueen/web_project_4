@@ -1,6 +1,6 @@
 import { popUpCreator} from './utils.js';
 
-export default class Card {
+class Card {
     constructor(data, cardTemplateSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
@@ -50,3 +50,5 @@ export default class Card {
         return this._card;
         }
     }
+
+    export default Card;
