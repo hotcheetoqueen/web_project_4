@@ -55,14 +55,16 @@ const toggleHandler = (e) => {
     e.stopImmediatePropagation();
 };
 
-// profileFormOpen.addEventListener('click', () => {
-//     editPopup.open()
-// });
+profileFormOpen.addEventListener('click', (evt) => {
+    evt.preventDefault();
 
-profileFormOpen.addEventListener('click', toggleHandler);
+    toggleHandler(evt)
+});
+
+// profileFormOpen.addEventListener('click', toggleHandler);
 // profileFormClose.addEventListener('click', toggleHandler);
     
-profileForm.addEventListener('click', (evt) => {
+profileForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     userName.textContent = nameInput.value; 
@@ -71,7 +73,7 @@ profileForm.addEventListener('click', (evt) => {
     // const userData = new UserInfo(name, job);
     // userData.setUserInfo();
 
-    toggleHandler();
+    toggleHandler(evt);
 });
 
 // Photos form handler
@@ -155,7 +157,7 @@ const cardList = new Section(
   listWrapper
 );
 
-cardList.renderItems();
+cardList.renderer();
 
 function handleCardClick(name, link) {
     popupImage.open(name, link);
