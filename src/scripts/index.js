@@ -50,14 +50,16 @@ popupImage.setEventListeners();
 
 
 // Handlers
-const toggleHandler = (inputValues, e) => {
-    overlay.classList.toggle('overlay_visible');
-    profileModal.classList.toggle('modal_visible');
+const toggleHandler = (e) => {
+    // Add input values as parameter
+    // overlay.classList.toggle('overlay_visible');
+    // profileModal.classList.toggle('modal_visible');
+    editPopup.open();
 
     // userData.setUserInfo(inputValues);
 
-    nameInput.value = userName.textContent;
-    jobInput.value = userJob.textContent;
+    // nameInput.value = userName.textContent;
+    // jobInput.value = userJob.textContent;
 
     e.stopImmediatePropagation();
 };
@@ -79,8 +81,8 @@ profileForm.addEventListener('submit', (evt) => {
     userName.textContent = nameInput.value; 
     userJob.textContent = jobInput.value; 
 
-
-    toggleHandler(evt);
+    editPopup.close();
+    // toggleHandler(evt);
 });
 
 // Photos form handler
@@ -88,6 +90,8 @@ profileForm.addEventListener('submit', (evt) => {
 const toggleImgHandler = (e) => {
     overlay.classList.toggle('overlay_visible');
     imageModal.classList.toggle('modal_visible');
+
+    // Currently opens edit form -- addPopup.open();
 
     e.stopImmediatePropagation();
 };
@@ -112,20 +116,24 @@ imageModal.addEventListener('submit', (evt) => {
 
 // Create new card from image modal
 overlay.addEventListener('click', () => {
-        overlay.classList.remove('overlay_visible');
-        profileModal.classList.remove('modal_visible');
-        imageModal.classList.remove('modal_visible');
-        popUp.classList.remove('card-popup__figure_visible');
+    editPopup.close();
+    // Broken -- addPopup.close();
+        // overlay.classList.remove('overlay_visible');
+        // profileModal.classList.remove('modal_visible');
+        // imageModal.classList.remove('modal_visible');
+        // popUp.classList.remove('card-popup__figure_visible');
 });
 
 window.addEventListener('keydown', () => {
-    // close();
-    if (event.key === 'Escape') {
-        overlay.classList.remove('overlay_visible');
-        profileModal.classList.remove('modal_visible');
-        imageModal.classList.remove('modal_visible');
-        popUp.classList.remove('card-popup__figure_visible');
-    }
+    editPopup.close();
+    // Broken -- addPopup.close(); 
+    
+    // if (event.key === 'Escape') {
+        // overlay.classList.remove('overlay_visible');
+        // profileModal.classList.remove('modal_visible');
+        // imageModal.classList.remove('modal_visible');
+        // popUp.classList.remove('card-popup__figure_visible');
+    // }
 });
 
 
