@@ -93,28 +93,30 @@ imageFormOpen.addEventListener('click', (evt) => {
 imageModal.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    const cardInfo = {
-        name: captionInput.value,
-        link: imageInput.value
-    };
+    // const cardInfo = {
+    //     name: captionInput.value,
+    //     link: imageInput.value
+    // };
 
-    setCard(cardInfo);
+    // setCard(cardInfo);
+
+    let newCard = new Card(cardInfo, cardTemplateSelector);
+    // , handleCardClick
+    newCard = newCard.getCard();
+    cards.push(newCard);
+    cardList.renderer();
+
     addPopup.close();    
 });
 
 
 // Create new card from image modal
-overlay.addEventListener('click', () => {
-    editPopup.close();
-    addPopup.close();
-});
-
-window.addEventListener('keydown', () => {
-    if (event.key === 'Escape') {
-        editPopup.close();
-        addPopup.close(); 
-    }
-});
+// window.addEventListener('keydown', () => {
+//     if (event.key === 'Escape') {
+//         editPopup.close();
+//         addPopup.close(); 
+//     }
+// });
 
 
 // New instances
@@ -135,13 +137,6 @@ defaultCards.forEach((card) => {
 
 
 // New instances of card placement
-const cards = [];
-for (const card of defaultCards) {
-  let newCard = new Card(card, cardTemplateSelector, handleCardClick);
-  newCard = newCard.getCard();
-  cards.push(newCard);
-}
-
 const cardList = new Section(
   {
     items: cards,
@@ -154,6 +149,6 @@ const cardList = new Section(
 
 cardList.renderer();
 
-function handleCardClick(name, link) {
-    popupImage.open(name, link);
-}
+// function handleCardClick(name, link) {
+//     popupImage.open(name, link);
+// }
