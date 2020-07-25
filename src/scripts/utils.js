@@ -8,10 +8,10 @@ export const imageModal = document.querySelector('.modal_image');
 
 // Modal triggers
 export const profileForm = document.querySelector('.modal__form_profile');
-
 export const profileFormOpen = document.querySelector('.profile__edit-button');
 export const profileFormClose = document.querySelector('.modal__close_profile');
 
+export const imageForm = document.querySelector('.modal__form_image');
 export const imageFormOpen = document.querySelector('.profile__add-button');
 export const imageFormClose = document.querySelector('.modal__close_image');
 

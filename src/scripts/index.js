@@ -7,17 +7,15 @@ import PopupWithForm from './PopupWithForm.js';
 import Section from './Section.js';
 import UserInfo from './UserInfo.js';
 import {         
-    popUp, 
-    overlay, 
-    defaultCards, 
-    defaultConfig, 
-    imageModal, 
-    profileModal, 
-    profileForm,
-    profileFormOpen,
-    profileFormClose,
-    imageFormOpen, 
-    imageFormClose,
+        overlay, 
+        defaultCards, 
+        defaultConfig, 
+        imageModal, 
+        profileModal, 
+        profileForm,
+        profileFormOpen,
+        imageForm,
+        imageFormOpen, 
         userName,
         nameInput,
         userJob,
@@ -26,9 +24,10 @@ import {
         imageInput,
     } from './utils.js';
 
+
 // Form modals
-const editPopup = new PopupWithForm(".modal__form_profile", toggleHandler);
-const addPopup = new PopupWithForm(".modal__form_image", toggleImgHandler);
+const editPopup = new PopupWithForm(profileForm, toggleHandler);
+const addPopup = new PopupWithForm(imageForm, toggleImgHandler);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 
@@ -41,7 +40,7 @@ imageFormValidation.enableValidation();
 
 
 // Image expand
-const popupImage = new PopupWithImage('.modal_image');
+const popupImage = new PopupWithImage('.card-popup__figure');
 popupImage.setEventListeners();
 
 
@@ -51,15 +50,10 @@ popupImage.setEventListeners();
 
 // Handlers
 const toggleHandler = (e) => {
-    // Add input values as parameter
-    // overlay.classList.toggle('overlay_visible');
-    // profileModal.classList.toggle('modal_visible');
     editPopup.open();
 
-    // userData.setUserInfo(inputValues);
-
-    // nameInput.value = userName.textContent;
-    // jobInput.value = userJob.textContent;
+    nameInput.value = userName.textContent;
+    jobInput.value = userJob.textContent;
 
     e.stopImmediatePropagation();
 };
@@ -70,34 +64,30 @@ profileFormOpen.addEventListener('click', (evt) => {
     toggleHandler(evt);
 });
 
-// profileFormOpen.addEventListener('click', toggleHandler);
-// profileFormClose.addEventListener('click', toggleHandler);
-
-
-
 profileForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
+
+    // userData.setUserInfo(inputValues);
 
     userName.textContent = nameInput.value; 
     userJob.textContent = jobInput.value; 
 
     editPopup.close();
-    // toggleHandler(evt);
 });
 
+
 // Photos form handler
-
 const toggleImgHandler = (e) => {
-    overlay.classList.toggle('overlay_visible');
-    imageModal.classList.toggle('modal_visible');
-
-    // Currently opens edit form -- addPopup.open();
+    addPopup.open();
 
     e.stopImmediatePropagation();
 };
 
-imageFormOpen.addEventListener('click', toggleImgHandler);
-imageFormClose.addEventListener('click', toggleImgHandler);
+imageFormOpen.addEventListener('click', (evt) => {
+    evt.preventDefault();
+
+    toggleImgHandler(evt);
+});
 
 // Image modal listener for new card info
 imageModal.addEventListener('submit', (evt) => {
@@ -109,30 +99,20 @@ imageModal.addEventListener('submit', (evt) => {
     };
 
     setCard(cardInfo);
-
-    toggleImgHandler(evt);
+    addPopup.close();    
 });
 
 
 // Create new card from image modal
 overlay.addEventListener('click', () => {
     editPopup.close();
-    // Broken -- addPopup.close();
-        // overlay.classList.remove('overlay_visible');
-        // profileModal.classList.remove('modal_visible');
-        // imageModal.classList.remove('modal_visible');
-        // popUp.classList.remove('card-popup__figure_visible');
+    addPopup.close();
 });
 
 window.addEventListener('keydown', () => {
     if (event.key === 'Escape') {
         editPopup.close();
-        // Broken -- addPopup.close(); 
-
-        // overlay.classList.remove('overlay_visible');
-        // profileModal.classList.remove('modal_visible');
-        // imageModal.classList.remove('modal_visible');
-        // popUp.classList.remove('card-popup__figure_visible');
+        addPopup.close(); 
     }
 });
 
