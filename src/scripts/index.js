@@ -32,6 +32,7 @@ const addPopup = new PopupWithForm(".modal__form_image", toggleImgHandler);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 
+
 // Validation
 const profileFormValidation = new FormValidator(defaultConfig, profileModal);
 const imageFormValidation = new FormValidator(defaultConfig, imageModal);
@@ -44,10 +45,16 @@ const popupImage = new PopupWithImage('.modal_image');
 popupImage.setEventListeners();
 
 
+// User info instance
+// const userData = new UserInfo(name, job);
+
+
 // Handlers
-const toggleHandler = (e) => {
+const toggleHandler = (inputValues, e) => {
     overlay.classList.toggle('overlay_visible');
     profileModal.classList.toggle('modal_visible');
+
+    // userData.setUserInfo(inputValues);
 
     nameInput.value = userName.textContent;
     jobInput.value = userJob.textContent;
@@ -58,20 +65,20 @@ const toggleHandler = (e) => {
 profileFormOpen.addEventListener('click', (evt) => {
     evt.preventDefault();
 
-    toggleHandler(evt)
+    toggleHandler(evt);
 });
 
 // profileFormOpen.addEventListener('click', toggleHandler);
 // profileFormClose.addEventListener('click', toggleHandler);
-    
+
+
+
 profileForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     userName.textContent = nameInput.value; 
     userJob.textContent = jobInput.value; 
 
-    // const userData = new UserInfo(name, job);
-    // userData.setUserInfo();
 
     toggleHandler(evt);
 });
@@ -99,7 +106,7 @@ imageModal.addEventListener('submit', (evt) => {
 
     setCard(cardInfo);
 
-    toggleImgHandler();
+    toggleImgHandler(evt);
 });
 
 
@@ -142,7 +149,7 @@ defaultCards.forEach((card) => {
 // New instances of card placement
 const cards = [];
 for (const card of defaultCards) {
-  let newCard = new Card(card.data, cardTemplateSelector, handleCardClick);
+  let newCard = new Card(card, cardTemplateSelector, handleCardClick);
   newCard = newCard.getCard();
   cards.push(newCard);
 }
