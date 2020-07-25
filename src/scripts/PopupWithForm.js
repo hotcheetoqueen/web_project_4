@@ -31,9 +31,10 @@ export default class PopupWithForm extends Popup {
 
     open(inputValues) {
         super.open();
-
-        this._name.textContent = inputValues.name;
-        this._job.textContent = inputValues.job;
+        if (inputValues) {
+            this._name.textContent = inputValues.name;
+            this._job.textContent = inputValues.job;
+        }
     }
 
     close() {

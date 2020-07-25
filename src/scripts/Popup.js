@@ -1,12 +1,9 @@
-// import * as utils from './utils.js';
-
 export default class Popup {
     constructor(popupSelector) {
         this._popupElement = document.querySelector('.modal');
         this._popupOverlay = document.querySelector('.overlay');
         this._popupImage = document.querySelector('.card-popup__figure');
         this._popupSelector = popupSelector;
-        // this._popupElement = popupSelector;
 
         this._closeButton = document.querySelector('.modal__close');
         this._handleEscClose = this._handleEscClose.bind(this);
@@ -43,6 +40,5 @@ export default class Popup {
               this.close();
             });
 
-            // this._handleEscClose();
           }
 }
