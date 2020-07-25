@@ -125,15 +125,15 @@ overlay.addEventListener('click', () => {
 });
 
 window.addEventListener('keydown', () => {
-    editPopup.close();
-    // Broken -- addPopup.close(); 
-    
-    // if (event.key === 'Escape') {
+    if (event.key === 'Escape') {
+        editPopup.close();
+        // Broken -- addPopup.close(); 
+
         // overlay.classList.remove('overlay_visible');
         // profileModal.classList.remove('modal_visible');
         // imageModal.classList.remove('modal_visible');
         // popUp.classList.remove('card-popup__figure_visible');
-    // }
+    }
 });
 
 
