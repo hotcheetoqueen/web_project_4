@@ -1,7 +1,7 @@
 import { userName, userJob } from './utils.js';
 
 export default class UserInfo {
-    constructor(name, job) {
+    constructor({ name, job }) {
         this._name = name;
         this._job = job; 
 }
@@ -13,8 +13,10 @@ export default class UserInfo {
         };
     }
 
-    setUserInfo({ name, job }) {
-        userName.textContent = name; 
-        userJob.textContent = job; 
+    setUserInfo({ newName, newJob }) {
+        this._name = newName;
+        this._job = newJob;
+        // userName.textContent = name; 
+        // userJob.textContent = job; 
     }
 }

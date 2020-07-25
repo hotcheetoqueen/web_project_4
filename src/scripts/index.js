@@ -7,7 +7,6 @@ import PopupWithForm from './PopupWithForm.js';
 import Section from './Section.js';
 import UserInfo from './UserInfo.js';
 import {         
-        overlay, 
         defaultCards, 
         defaultConfig, 
         imageModal, 
@@ -20,9 +19,12 @@ import {
         nameInput,
         userJob,
         jobInput,
-        captionInput,
-        imageInput,
     } from './utils.js';
+
+
+// Image expand
+const popupImage = new PopupWithImage('.card-popup__figure');
+popupImage.setEventListeners();
 
 
 // Form modals
@@ -39,21 +41,12 @@ profileFormValidation.enableValidation();
 imageFormValidation.enableValidation();
 
 
-// Image expand
-const popupImage = new PopupWithImage('.card-popup__figure');
-popupImage.setEventListeners();
-
-
-// User info instance
-// const userData = new UserInfo(name, job);
-
+// UserInfo instance
+const userInfo = new UserInfo(userName, userJob);
 
 // Handlers
 const toggleHandler = (e) => {
-    editPopup.open();
-
-    nameInput.value = userName.textContent;
-    jobInput.value = userJob.textContent;
+    editPopup.open(userInfo.getUserInfo());
 
     e.stopImmediatePropagation();
 };
@@ -67,10 +60,7 @@ profileFormOpen.addEventListener('click', (evt) => {
 profileForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    // userData.setUserInfo(inputValues);
-
-    userName.textContent = nameInput.value; 
-    userJob.textContent = jobInput.value; 
+    userInfo.setUserInfo(nameInput.value, jobInput.value);
 
     editPopup.close();
 });
@@ -93,15 +83,7 @@ imageFormOpen.addEventListener('click', (evt) => {
 imageModal.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    // const cardInfo = {
-    //     name: captionInput.value,
-    //     link: imageInput.value
-    // };
-
-    // setCard(cardInfo);
-
     let newCard = new Card(cardInfo, cardTemplateSelector);
-    // , handleCardClick
     newCard = newCard.getCard();
     cards.push(newCard);
     cardList.renderer();
@@ -110,33 +92,19 @@ imageModal.addEventListener('submit', (evt) => {
 });
 
 
-// Create new card from image modal
-// window.addEventListener('keydown', () => {
-//     if (event.key === 'Escape') {
-//         editPopup.close();
-//         addPopup.close(); 
-//     }
-// });
-
-
 // New instances
 const cardTemplateSelector = '.grid__card-template';
 const listWrapper = document.querySelector('.grid__photos');
 
-function setCard(data) {
-    const card = new Card(data, cardTemplateSelector, () => {
-        addPopup.open({ link, name });
-    })
-
-    listWrapper.prepend(card.getCard());
-};
-
-defaultCards.forEach((card) => {
-    setCard(card);
-});
-
 
 // New instances of card placement
+const cards = [];
+for (const card of defaultCards) {
+    let newCard = new Card(card, cardTemplateSelector);
+    newCard = newCard.getCard();
+    cards.push(newCard);
+}
+
 const cardList = new Section(
   {
     items: cards,
@@ -149,6 +117,3 @@ const cardList = new Section(
 
 cardList.renderer();
 
-// function handleCardClick(name, link) {
-//     popupImage.open(name, link);
-// }
