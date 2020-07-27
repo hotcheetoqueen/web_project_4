@@ -22,11 +22,6 @@ import {
     } from './utils.js';
 
 
-// Image expand
-const popupImage = new PopupWithImage('.card-popup__figure');
-popupImage.setEventListeners();
-
-
 // Form modals
 const editPopup = new PopupWithForm(profileForm, toggleHandler);
 const addPopup = new PopupWithForm(imageForm, toggleImgHandler);
@@ -42,9 +37,19 @@ imageFormValidation.enableValidation();
 
 
 // UserInfo instance
-const userInfo = new UserInfo(userName, userJob);
+const userInfo = new UserInfo({ 
+    name: userName,
+    job: userJob 
+});
 
-// Handlers
+// New instances
+const cardTemplateSelector = '.grid__card-template';
+const listWrapper = document.querySelector('.grid__photos');
+
+
+
+
+// Edit handler
 const toggleHandler = (e) => {
     editPopup.open(userInfo.getUserInfo());
 
@@ -79,9 +84,15 @@ imageFormOpen.addEventListener('click', (evt) => {
     toggleImgHandler(evt);
 });
 
+
 // Image modal listener for new card info
 imageModal.addEventListener('submit', (evt) => {
     evt.preventDefault();
+
+    const cardInfo = {
+        name: captionInput.value,
+        link: imageInput.value,
+    };
 
     let newCard = new Card(cardInfo, cardTemplateSelector);
     newCard = newCard.getCard();
@@ -90,11 +101,6 @@ imageModal.addEventListener('submit', (evt) => {
 
     addPopup.close();    
 });
-
-
-// New instances
-const cardTemplateSelector = '.grid__card-template';
-const listWrapper = document.querySelector('.grid__photos');
 
 
 // New instances of card placement
@@ -116,4 +122,3 @@ const cardList = new Section(
 );
 
 cardList.renderer();
-

@@ -1,3 +1,5 @@
+import PopupWithImage from './PopupWithImage.js';
+
 // Popup helpers
 export const popUp = document.querySelector('.card-popup__figure');
 export const overlay = document.querySelector('.overlay');
@@ -28,36 +30,47 @@ export const jobInput = document.querySelector('.modal__input_description');
 export const captionInput = document.querySelector('.modal__input_caption');
 export const imageInput = document.querySelector('.modal__input_image-link');
 
+// Image expand
+export const popupImage = new PopupWithImage('.card-popup__figure', handleCardClick);
+popupImage.setEventListeners();
 
-// Popup functions
-export function togglePopHandler(e) {
 
-    if (overlay.classList.contains('overlay_visible') && !popUp.classList.contains('card-popup__figure_visible')) {
-        e.preventDefault();
-    } else {
-        overlay.classList.toggle('overlay_visible');
-        popUp.classList.toggle('card-popup__figure_visible');
-    }
-};
+export function handleCardClick(name, link) {
+    popupImage.open(name, link);
+}
+
+// function togglePopHandler(name, link) {
+//     e.preventDefault();
+
+//     popupImage.open(name, link);
+// };
 
 export const popTemp = document.querySelector('.grid__card-template');
-export const popClose = document.querySelector('.card-popup__close');
 
-popTemp.addEventListener('click', togglePopHandler);
-popClose.addEventListener('click', togglePopHandler);
+// export function popUpCreator(link, name, e) {
+// popTemp.addEventListener('click', (e) => {
+//     const popImage = document.querySelector('.card-popup__image');
+//     const popTitle = document.querySelector('.card-popup__caption');
 
+//     popImage.src = `${link}`;
+//     popTitle.textContent = name;
 
+//     handleCardClick(e);
+
+//     e.stopPropagation();  
+// });
 export function popUpCreator(link, name, e) {
     const popImage = document.querySelector('.card-popup__image');
     const popTitle = document.querySelector('.card-popup__caption');
 
         popImage.src = `${link}`;
         popTitle.textContent = name;
-        togglePopHandler();
+        handleCardClick();
         e.stopPropagation();
 };
 
-// Arguments
+
+// popClose.addEventListener('click', togglePopHandler);// Arguments
 export const defaultConfig = {
     inputSelector: '.modal__input',
     submitButtonSelector: '.modal__save-btn',

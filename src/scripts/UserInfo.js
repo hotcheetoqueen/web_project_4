@@ -8,13 +8,13 @@ export default class UserInfo {
 
     getUserInfo() {
         return {
-            name: this._name,
-            job: this._job,
+            name: this._name.textContent,
+            job: this._job.textContent,
         };
     }
 
-    setUserInfo({ newName, newJob }) {
-        this._name = newName;
-        this._job = newJob;
+    setUserInfo(inputValues) {
+        this._name = inputValues.newName;
+        this._job = inputValues.newJob;
     }
 }
