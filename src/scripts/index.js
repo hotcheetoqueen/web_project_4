@@ -9,6 +9,7 @@ import UserInfo from './UserInfo.js';
 import {         
         defaultCards, 
         defaultConfig, 
+        popUp,
         imageModal, 
         profileModal, 
         profileForm,
@@ -23,10 +24,31 @@ import {
 
 
 // Form modals
-const editPopup = new PopupWithForm(profileForm, toggleHandler);
-const addPopup = new PopupWithForm(imageForm, toggleImgHandler);
+const editPopup = new PopupWithForm('.modal__form_profile', toggleHandler);
+const addPopup = new PopupWithForm('.modal__form_image', toggleImgHandler);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
+
+// Image expand
+const popupImage = new PopupWithImage('.card-popup__figure', togglePopHandler);
+popupImage.setEventListeners();
+
+
+const togglePopHandler = ({ name, link }) => {
+    popupImage.open(name, link);
+};
+
+const popTemp = document.querySelector('.grid__card-template');
+
+popTemp.addEventListener('click', (evt) => {
+    const popImage = document.querySelector('.card-popup__image');
+    const popTitle = document.querySelector('.card-popup__caption');
+
+        popImage.src = `${link}`;
+        popTitle.textContent = name;
+        togglePopHandler(ev);
+        evt.stopPropagation();
+});
 
 
 // Validation
@@ -46,27 +68,6 @@ const userInfo = new UserInfo({
 const cardTemplateSelector = '.grid__card-template';
 const listWrapper = document.querySelector('.grid__photos');
 
-
-// Image expand
-const popupImage = new PopupWithImage('.card-popup__figure', togglePopHandler);
-popupImage.setEventListeners();
-
-const togglePopHandler = ({ name, link }) => {
-    popupImage.open(name, link);
-};
-
-const popTemp = document.querySelector('.grid__card-template');
-
-
-popTemp.addEventListener('click', (evt) => {
-    const popImage = document.querySelector('.card-popup__image');
-    const popTitle = document.querySelector('.card-popup__caption');
-
-        popImage.src = `${link}`;
-        popTitle.textContent = name;
-        togglePopHandler(ev);
-        evt.stopPropagation();
-});
 
 // Edit handler
 const toggleHandler = (e) => {

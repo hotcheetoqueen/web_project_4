@@ -7,13 +7,12 @@ export default class PopupWithImage extends Popup {
 
 
     open({ link, name }) {
-        const modalImageLink = this._popupElement.querySelector('.modal__input_image-link');
-        // const modalImageLink = this._popupElement.querySelector('.grid__photos-image');
+        const modalImageLink = this._popupElement.querySelector('.card-popup__image');
+        const modalImageCaption = this._popupElement.querySelector('.card-popup__caption');
 
         modalImageLink.src = link;
         modalImageLink.alt = name;
-        this._popupElement.querySelector('.modal__input_caption').textContent = name;
-        // this._popupElement.querySelector('.grid__photos-caption').textContent = name;
+        modalImageCaption.textContent = name;
 
         super.open();
     }
