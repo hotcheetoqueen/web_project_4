@@ -30,44 +30,7 @@ export const jobInput = document.querySelector('.modal__input_description');
 export const captionInput = document.querySelector('.modal__input_caption');
 export const imageInput = document.querySelector('.modal__input_image-link');
 
-// Image expand
-export const popupImage = new PopupWithImage('.card-popup__figure', handleCardClick);
-popupImage.setEventListeners();
 
-
-export function handleCardClick(name, link) {
-    popupImage.open(name, link);
-}
-
-// function togglePopHandler(name, link) {
-//     e.preventDefault();
-
-//     popupImage.open(name, link);
-// };
-
-export const popTemp = document.querySelector('.grid__card-template');
-
-// export function popUpCreator(link, name, e) {
-// popTemp.addEventListener('click', (e) => {
-//     const popImage = document.querySelector('.card-popup__image');
-//     const popTitle = document.querySelector('.card-popup__caption');
-
-//     popImage.src = `${link}`;
-//     popTitle.textContent = name;
-
-//     handleCardClick(e);
-
-//     e.stopPropagation();  
-// });
-export function popUpCreator(link, name, e) {
-    const popImage = document.querySelector('.card-popup__image');
-    const popTitle = document.querySelector('.card-popup__caption');
-
-        popImage.src = `${link}`;
-        popTitle.textContent = name;
-        handleCardClick();
-        e.stopPropagation();
-};
 
 
 // popClose.addEventListener('click', togglePopHandler);// Arguments

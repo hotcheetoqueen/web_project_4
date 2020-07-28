@@ -1,6 +1,4 @@
-import { popUpCreator} from './utils.js';
-
-class Card {
+export default class Card {
     constructor(data, cardTemplateSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
@@ -31,12 +29,13 @@ class Card {
             this._card.remove();
             this._card = null;
         });
-            
-        this._imagePop.addEventListener('click', (e) => {
-            popUpCreator(this._link, this._name, e);
-            this._handleCardClick();
-        }); 
 
+        this._card.querySelector('.grid__photos-image').addEventListener('click', () => {
+            this._handleCardClick({
+                name: this._name,
+                link: this._link,
+            });
+        });
         }
 
     getCard() {
@@ -50,5 +49,3 @@ class Card {
         return this._card;
         }
     }
-
-    export default Card;

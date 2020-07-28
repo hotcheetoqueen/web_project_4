@@ -47,7 +47,26 @@ const cardTemplateSelector = '.grid__card-template';
 const listWrapper = document.querySelector('.grid__photos');
 
 
+// Image expand
+const popupImage = new PopupWithImage('.card-popup__figure', togglePopHandler);
+popupImage.setEventListeners();
 
+const togglePopHandler = ({ name, link }) => {
+    popupImage.open(name, link);
+};
+
+const popTemp = document.querySelector('.grid__card-template');
+
+
+popTemp.addEventListener('click', (evt) => {
+    const popImage = document.querySelector('.card-popup__image');
+    const popTitle = document.querySelector('.card-popup__caption');
+
+        popImage.src = `${link}`;
+        popTitle.textContent = name;
+        togglePopHandler(ev);
+        evt.stopPropagation();
+});
 
 // Edit handler
 const toggleHandler = (e) => {
@@ -106,7 +125,7 @@ imageModal.addEventListener('submit', (evt) => {
 // New instances of card placement
 const cards = [];
 for (const card of defaultCards) {
-    let newCard = new Card(card, cardTemplateSelector);
+    let newCard = new Card(card, cardTemplateSelector, togglePopHandler);
     newCard = newCard.getCard();
     cards.push(newCard);
 }
@@ -122,3 +141,7 @@ const cardList = new Section(
 );
 
 cardList.renderer();
+
+// function handleCardClick({ name, link }) {
+//     popupImage.open(name, link);
+// }
