@@ -24,18 +24,17 @@ import {
 
 
 // Form modals
-const editPopup = new PopupWithForm('.modal__form_profile', toggleHandler);
-const addPopup = new PopupWithForm('.modal__form_image', toggleImgHandler);
+const editPopup = new PopupWithForm('.modal_profile', toggleHandler);
+const addPopup = new PopupWithForm('.modal_image', toggleImgHandler);
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 
 // Image expand
-const popupImage = new PopupWithImage('.card-popup__figure', togglePopHandler);
+const popupImage = new PopupWithImage('.card-popup', togglePopHandler);
 popupImage.setEventListeners();
 
-
 const togglePopHandler = ({ name, link }) => {
-    popupImage.open(name, link);
+    popupImage.open({ name, link });
 };
 
 const popTemp = document.querySelector('.grid__card-template');
@@ -44,10 +43,11 @@ popTemp.addEventListener('click', (evt) => {
     const popImage = document.querySelector('.card-popup__image');
     const popTitle = document.querySelector('.card-popup__caption');
 
-        popImage.src = `${link}`;
-        popTitle.textContent = name;
-        togglePopHandler(ev);
-        evt.stopPropagation();
+    popImage.src = `${link}`;
+    popTitle.textContent = name;
+
+    togglePopHandler(evt);
+    evt.stopPropagation();
 });
 
 
@@ -142,7 +142,3 @@ const cardList = new Section(
 );
 
 cardList.renderer();
-
-// function handleCardClick({ name, link }) {
-//     popupImage.open(name, link);
-// }

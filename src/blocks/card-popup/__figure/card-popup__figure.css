@@ -1,4 +1,9 @@
-.card-popup__figure {
+/* @import url('./__caption/card-popup__caption.css');
+@import url('./__close/card-popup__close.css'); */
+/* @import url('./__figure/card-popup__figure.css'); */
+/* @import url('./__image/card-popup__image.css');
+
+.card-popup {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -10,14 +15,14 @@
     transition: visibility .2s, opacity .5s linear;
 }
 
-.card-popup__figure_visible {
+.card-popup_visible {
     visibility: visible;
     opacity: 1;
 }
 
 @media screen and (max-width: 320px) {
-    .card-popup__figure {
+    .card-popup {
         margin: auto;
         text-align: left;
     }
-}
+} */

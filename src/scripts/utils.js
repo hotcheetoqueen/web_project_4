@@ -1,7 +1,7 @@
 import PopupWithImage from './PopupWithImage.js';
 
 // Popup helpers
-export const popUp = document.querySelector('.card-popup__figure');
+export const popUp = document.querySelector('.card-popup');
 export const overlay = document.querySelector('.overlay');
 
 // Modal forms
@@ -33,7 +33,9 @@ export const imageInput = document.querySelector('.modal__input_image-link');
 
 
 
-// popClose.addEventListener('click', togglePopHandler);// Arguments
+// popClose.addEventListener('click', togglePopHandler);
+
+// Arguments
 export const defaultConfig = {
     inputSelector: '.modal__input',
     submitButtonSelector: '.modal__save-btn',
