@@ -7,7 +7,7 @@ export default class Popup {
         // this._popupImage = document.querySelector('.card-popup__figure');
 
         this._closeButton = document.querySelector('.modal__close');
-        this._closeButton = document.querySelector('.card-popup__close');
+        this._closeImgButton = document.querySelector('.card-popup__close');
         this._handleEscClose = this._handleEscClose.bind(this);
     }
 
@@ -37,6 +37,10 @@ export default class Popup {
             this._closeButton.addEventListener("click", () => {
               this.close();
             });
+
+            this._closeImgButton.addEventListener("click", () => {
+                this.close();
+              });
 
             this._popupOverlay.addEventListener("click", () => {
               this.close();
