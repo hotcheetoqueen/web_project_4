@@ -20,17 +20,41 @@ import {
         nameInput,
         userJob,
         jobInput,
+        captionInput,
+        imageInput,
     } from './utils.js';
 
+// UserInfo instance
+const userInfo = new UserInfo({ 
+    name: userName,
+    job: userJob 
+});
 
 // Form modals
-const editPopup = new PopupWithForm('.modal_profile', toggleHandler);
-const addPopup = new PopupWithForm('.modal_image', toggleImgHandler);
+const editPopup = new PopupWithForm('.modal_profile', (data) => {
+    userInfo.setUserInfo(data);
+});
+
+const addPopup = new PopupWithForm('.modal_image', (data) => {
+    const cardInfo = {
+        name: captionInput.value,
+        link: imageInput.value,
+    };
+
+    let newCard = new Card(cardInfo, cardTemplateSelector, (data) => {
+        popupImage.open(data)
+    });
+
+    cardList.addItem(newCard.getCard());
+});
+
+
+// Image expand
+const popupImage = new PopupWithImage('.modal_photo');
+
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 
-// Image expand
-const popupImage = new PopupWithImage('.card-popup', togglePopHandler);
 popupImage.setEventListeners();
 
 const togglePopHandler = ({ name, link }) => {
@@ -58,84 +82,41 @@ profileFormValidation.enableValidation();
 imageFormValidation.enableValidation();
 
 
-// UserInfo instance
-const userInfo = new UserInfo({ 
-    name: userName,
-    job: userJob 
-});
-
 // New instances
 const cardTemplateSelector = '.grid__card-template';
 const listWrapper = document.querySelector('.grid__photos');
 
 
 // Edit handler
-const toggleHandler = (e) => {
-    editPopup.open(userInfo.getUserInfo());
-
-    e.stopImmediatePropagation();
-};
-
 profileFormOpen.addEventListener('click', (evt) => {
     evt.preventDefault();
 
-    toggleHandler(evt);
+    editPopup.open();
 });
 
-profileForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    userInfo.setUserInfo(nameInput.value, jobInput.value);
-
-    editPopup.close();
-});
-
-
-// Photos form handler
-const toggleImgHandler = (e) => {
-    addPopup.open();
-
-    e.stopImmediatePropagation();
-};
 
 imageFormOpen.addEventListener('click', (evt) => {
     evt.preventDefault();
 
-    toggleImgHandler(evt);
-});
-
-
-// Image modal listener for new card info
-imageModal.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const cardInfo = {
-        name: captionInput.value,
-        link: imageInput.value,
-    };
-
-    let newCard = new Card(cardInfo, cardTemplateSelector);
-    newCard = newCard.getCard();
-    cards.push(newCard);
-    cardList.renderer();
-
-    addPopup.close();    
+    addPopup.open();
 });
 
 
 // New instances of card placement
 const cards = [];
 for (const card of defaultCards) {
-    let newCard = new Card(card, cardTemplateSelector, togglePopHandler);
-    newCard = newCard.getCard();
-    cards.push(newCard);
+    let newCard = new Card(card, cardTemplateSelector, () => {
+        popupImage.open(card);
+    });
+        newCard = newCard.getCard();
+        cards.push(newCard);
 }
 
 const cardList = new Section(
   {
     items: cards,
     renderer: (element) => {
-      cardList.addItem(element);
+        cardList.addItem(element);
     },
   },
   listWrapper
