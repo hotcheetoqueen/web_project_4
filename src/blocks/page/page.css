@@ -1,9 +1,8 @@
+@import url('./__container/page__container.css');
+
 .page {
-    min-width: 320px;
-    max-width: 1280px;
     width: 100%;
     min-height: 100vh;
-    margin: 0 auto;
     padding: 0;
     background-color: #000000;
     color: #FFFFFF;

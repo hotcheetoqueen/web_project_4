@@ -9,17 +9,12 @@ import UserInfo from './UserInfo.js';
 import {         
         defaultCards, 
         defaultConfig, 
-        popUp,
         imageModal, 
         profileModal, 
-        profileForm,
         profileFormOpen,
-        imageForm,
         imageFormOpen, 
         userName,
-        nameInput,
         userJob,
-        jobInput,
         captionInput,
         imageInput,
     } from './utils.js';
@@ -64,8 +59,8 @@ const togglePopHandler = ({ name, link }) => {
 const popTemp = document.querySelector('.grid__card-template');
 
 popTemp.addEventListener('click', (evt) => {
-    const popImage = document.querySelector('.card-popup__image');
-    const popTitle = document.querySelector('.card-popup__caption');
+    const popImage = document.querySelector('.modal_photo__image');
+    const popTitle = document.querySelector('.modal_photo__caption');
 
     popImage.src = `${link}`;
     popTitle.textContent = name;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,9 @@
         <meta name="author" content="Jessica Perelman">
         <title>Around the U.S.</title>
     </head>
+
     <body class="page">
-        <div class="overlay">
+        <div class="page__container">
         <header class="header">
             <img class="header__logo" alt="Around the U.S. logo." src="./images/logoAroundUS.png">
         </header>
@@ -33,51 +35,56 @@
         </footer>
     </div>
         <section class="modal modal_profile">
-            <button class="modal__close modal__close_profile"></button>
-            <div class="modal__background">
-                <form action="#" class="modal__form modal__form_profile" novalidate>
-                <h3 class="modal__title">Edit profile</h3>
-                    <fieldset class="modal__fieldset">
-                    <label>
-                        <input class="modal__input modal__input_name" name="user-name" type="text" placeholder="Name" minlength="2" maxlength="40" id="profile-name">
-                        <span class="modal__input_error" id="profile-name-error"></span>
-                    </label>
-                    <label>
-                        <input class="modal__input modal__input_description" name="user-about" type="text" placeholder="About me" minlength="2" maxlength="200" id="profile-description">
-                        <span class="modal__input_error" id="profile-description-error"></span>
-                    </label>
-                        <button class="modal__save-btn" type="submit">Save</button>
-                    </fieldset>
-                </form>
+            <div class ="modal__container">
+                <button class="modal__close modal__close_profile"></button>
+                <div class="modal__background">
+                    <form action="#" class="modal__form modal__form_profile" novalidate>
+                        <h3 class="modal__title">Edit profile</h3>
+                        <fieldset class="modal__fieldset">
+                            <label>
+                                <input class="modal__input modal__input_name" name="user-name" type="text" placeholder="Name" minlength="2" maxlength="40" id="profile-name">
+                                <span class="modal__input_error" id="profile-name-error"></span>
+                            </label>
+                            <label>
+                                <input class="modal__input modal__input_description" name="user-about" type="text" placeholder="About me" minlength="2" maxlength="200" id="profile-description">
+                                <span class="modal__input_error" id="profile-description-error"></span>
+                            </label>
+                            <button class="modal__save-btn" type="submit">Save</button>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </section>
         <section class="modal modal_image">
-            <button class="modal__close modal__close_image"></button>
-            <div class="modal__background">
-                <form action="#" class="modal__form modal__form_image" novalidate>
-                <h3 class="modal__title">New place</h3>
-                    <fieldset class="modal__fieldset">
-                        <label>
-                            <input class="modal__input modal__input_caption" id="image-caption" name="card-caption" type="text" placeholder="Title" value="" minlength="1" maxlength="100" required>
-                            <span class="modal__input_error" id="image-caption-error"></span>
-                        </label>
-                        <label>
-                            <input class="modal__input modal__input_image-link" id="image-link" name="card-link" type="url" placeholder="Image link" value="" required>
-                            <span class="modal__input_error" id="image-link-error"></span>
-                        </label>
+            <div class="modal__container">
+                <button class="modal__close modal__close_image"></button>
+                <div class="modal__background">
+                    <form action="#" class="modal__form modal__form_image" novalidate>
+                    <h3 class="modal__title">New place</h3>
+                        <fieldset class="modal__fieldset">
+                            <label>
+                                <input class="modal__input modal__input_caption" id="image-caption" name="card-caption"
+                                    type="text" placeholder="Title" value="" minlength="1" maxlength="100" required>
+                                <span class="modal__input_error" id="image-caption-error"></span>
+                            </label>
+                            <label>
+                                <input class="modal__input modal__input_image-link" id="image-link" name="card-link"
+                                    type="url" placeholder="Image link" value="" required>
+                                <span class="modal__input_error" id="image-link-error"></span>
+                            </label>
                             <button class="modal__save-btn" type="submit">Create</button>
-                    </fieldset>
-                </form>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </section>
-        <!-- <section class="card-popup"> -->
-            <figure class="card-popup">
-                <button class="card-popup__close"></button>
-                <img class="card-popup__image" src="#" alt="">
-                <!-- src="" -->
-                <figcaption class="card-popup__caption"></figcaption>
+        <section class="modal modal_photo">
+            <figure class="modal__container">
+                <button class="modal__close"></button>
+                <img class="modal_photo__image" src="#" alt="">
+                <figcaption class="modal_photo__caption"></figcaption>
             </figure>
-        <!-- </section> -->
+        </section>
         <template class="grid__card-template">
             <li class="grid__photos-item">
                 <div class="grid__photos-img-area">
