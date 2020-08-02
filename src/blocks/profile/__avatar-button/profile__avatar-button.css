@@ -12,11 +12,7 @@
     transform: translate(-50%, -50%);
     margin: 0;
     padding: 0;
-    /* visibility: hidden; */
-}
-
-.profile__avatar.profile__avatar-button:hover {
-    visibility: visible; 
+    display: none;
 }
 
 .profile__avatar-button:focus {
