@@ -5,6 +5,12 @@
     margin: 0;
 }
 
+.profile__avatar:hover {
+    opacity: .2;
+    cursor: pointer;
+    z-index: 0;
+}
+
 @media screen and (max-width: 320px) {
     .profile__avatar {
         width: 120px;
