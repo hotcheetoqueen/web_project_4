@@ -5,10 +5,10 @@ export default class Api {
     }
 
     getCardList() {
-        return fetch(this.server + '/cards/', {
+        return fetch(this.server + '/cards', {
             method: 'GET',
             headers: this.headers,
-        }) .then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))
+        }).then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))
         .catch(console.log);
     }
 
@@ -20,9 +20,9 @@ export default class Api {
         .catch(console.log);
     }
 
-    getAppInfo() {
-        return Promise.all([this.getCardList(), this.getUserInfo()]);
-    }
+    // getAppInfo() {
+    //     return Promise.all([this.getCardList(), this.getUserInfo()]);
+    // }
 
     addCard({ name, link }) {
         return fetch(`${this.server}/cards/`, {

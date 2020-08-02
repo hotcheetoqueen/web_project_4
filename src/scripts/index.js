@@ -28,9 +28,42 @@ const api = new Api({
         authorization: "7c532e9d-132b-43e0-b1d4-55c21c0fd902",
         "Content-Type": "application/json"
     }
-})
+});
 
-// UserInfo instance
+
+// Image cards
+const cardTemplateSelector = '.grid__card-template';
+const listWrapper = document.querySelector('.grid__photos');
+
+api.getCardList()
+    .then((defaultCards) => {
+        const cards = [];
+        for (let card of defaultCards) {
+            let newCard = new Card(card, cardTemplateSelector, () => {
+                popupImage.open(card);
+            });
+            newCard = newCard.getCard();
+            cards.push(newCard);
+        } 
+        return cards;
+    })
+    .then(res => {
+        console.log(res)
+        const cardList = new Section(
+            {
+              items: res,
+              renderer: (element) => {
+                  cardList.addItem(element);
+              },
+            }, listWrapper
+          );
+          cardList.renderer();
+          return cardList;
+    })
+    .catch(console.log);
+
+
+// UserInfo data
 const userInfo = new UserInfo({ 
     name: userName,
     job: userJob,
@@ -45,42 +78,6 @@ api
     // .catch((err) => {
     //     console.log(err);
     // });
-
-// api.getCardList()
-//     .then((defaultCards) => {
-//         const cards = [];
-//         for (const card of defaultCards) {
-//             let newCard = new Card(card, cardTemplateSelector, () => {
-//                 popupImage.open(card);
-//             });
-//         newCard = newCard.getCard();
-//         cards.push(newCard);
-//         } 
-//         return cards;
-//     })
-
-
-// api.getAppInfo()
-//     .then(([cardList, userInfo]) => {
-//     const cardList = new Section(
-//         {
-//             items: cards,
-//             renderer: (element) => {
-//                 cardList.addItem(element);
-//             },
-//         },
-//         listWrapper
-//         );
-        
-//         cardList.renderer();
-//     });
-//     handleCardClick
-//     handleDeleteClick: (card) => {
-//         api.removeCard(card.id())
-//     } .then
-//     ))
-
-
 
 
 // Form modals
@@ -103,19 +100,44 @@ const editPopup = new PopupWithForm('.modal_profile', (data) => {
         });
 })
 
+
 const addPopup = new PopupWithForm('.modal_image', (data) => {
     const cardInfo = {
-        name: captionInput.value,
-        link: imageInput.value,
-    };
+    name: captionInput.value,
+    link: imageInput.value,
+}
 
-    let newCard = new Card(cardInfo, cardTemplateSelector, (data) => {
-        popupImage.open(data)
-    });
+// let newCard = new Card(cardInfo, cardTemplateSelector, (data) => {
+//     popupImage.open(data)
+// });
+// cardList.addItem(newCard.getCard());
+// })
 
-    cardList.addItem(newCard.getCard());
+//   api
+//     .addNewCard(data)
+//     .then((cardInfo) => {
+//         let newCard = new Card(cardInfo, 
+//             card._id,
+//             card.name,
+//             card.link,
+//             cardTemplateSelector,
+//             card.likes,
+//             card.ownerId,
+//             userInfo._id,
+//             handleCardClick,
+//             handleLikeClick,
+//             (data) => {
+//             popupImage.open(data)
+//         });
+    
+
 });
 
+editPopup.setEventListeners();
+addPopup.setEventListeners();
+
+
+// Delete cards
 // const deletePopup = new PopupWithConfirm('.modal_delete');
 
 // function openDeleteModal(card, cardId) {
@@ -129,9 +151,29 @@ const addPopup = new PopupWithForm('.modal_image', (data) => {
 //     card = null;
 // }
 
-editPopup.setEventListeners();
-addPopup.setEventListeners();
 // deletePopup.setEventListeners();
+
+
+
+// Liking tools
+// Like handler
+// if (!card.isLiked()) {
+//     api.addLike(cardID)
+//         .then((res) => {
+//             card.setLiked(res.likes.some((user) => user._id === me));
+//             card.setLikes(res.likes);
+//             card.render();
+//         }).catch(console.log);
+//     } else {
+//         api.removeLike(cardId)
+//         .then((res) => )
+//     }
+// function handleLikeClick(card, cardId, isLiked) {
+//     api.updateLikes(cardId, isLiked).then((data) => {
+//       card._likes = data.likes;
+//     })
+// }
+
 
 // Image expand
 const popupImage = new PopupWithImage('.modal_photo');
@@ -163,11 +205,6 @@ profileFormValidation.enableValidation();
 imageFormValidation.enableValidation();
 
 
-// New instances
-const cardTemplateSelector = '.grid__card-template';
-const listWrapper = document.querySelector('.grid__photos');
-
-
 // Form open event listeners
 profileFormOpen.addEventListener('click', (evt) => {
     evt.preventDefault();
@@ -175,46 +212,8 @@ profileFormOpen.addEventListener('click', (evt) => {
     editPopup.open();
 });
 
-
 imageFormOpen.addEventListener('click', (evt) => {
     evt.preventDefault();
 
     addPopup.open();
 });
-
-
-// New instances of card placement
-const cards = [];
-for (const card of defaultCards) {
-    let newCard = new Card(card, cardTemplateSelector, () => {
-        popupImage.open(card);
-    });
-        newCard = newCard.getCard();
-        cards.push(newCard);
-}    
-
-
-const cardList = new Section(
-    {
-      items: cards,
-      renderer: (element) => {
-          cardList.addItem(element);
-      },
-    },
-    listWrapper
-  );
-  
-  cardList.renderer();
-
-// Like handler
-// if (!card.isLiked()) {
-//     api.addLike(cardID)
-//         .then((res) => {
-//             card.setLiked(res.likes.some((user) => user._id === me));
-//             card.setLikes(res.likes);
-//             card.render();
-//         }).catch(console.log);
-//     } else {
-//         api.removeLike(cardId)
-//         .then((res) => )
-//     }
