@@ -9,14 +9,15 @@ export default class Api {
             method: 'GET',
             headers: this.headers,
         }) .then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))
-        .catch(console.log('Problem fetching API results'));
+        .catch(console.log);
     }
 
     getUserInfo() {
-        return fetch(this.server + '/users/me/', {
+        return fetch(`${this.server}/users/me/`, {
+            method: "GET",
             headers: this.headers,
         }) .then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))
-        .catch(console.log('Problem fetching API results'));
+        .catch(console.log);
     }
 
     getAppInfo() {
@@ -24,7 +25,7 @@ export default class Api {
     }
 
     addCard({ name, link }) {
-        return fetch(this.server + '/cards/', {
+        return fetch(`${this.server}/cards/`, {
             method: 'POST',
             headers: this.headers,
             body: JSON.stringify({
@@ -54,9 +55,9 @@ export default class Api {
         });
     }
 
-    setUserInfo({ name, about }) {
-        return fetch(this.server + '/users/me/', {
-            method: 'PATCH',
+    updateUserInfo({ name, job }) {
+        return fetch(`${this.server}/users/me/`, {
+            method: "PATCH",
             headers: this.headers,
             body: JSON.stringify({
                 name: name,
@@ -66,7 +67,7 @@ export default class Api {
             if (res.ok) {
                 return res.json();
             }
-        });
+        }).catch(console.log);
     }
 
     setUserAvatar({ avatar }) {

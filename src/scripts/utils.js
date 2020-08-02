@@ -26,6 +26,9 @@ export const nameInput = document.querySelector('.modal__input_name');
 export const userJob = document.querySelector('.profile__info_description');
 export const jobInput = document.querySelector('.modal__input_description');
 
+export const userAvatar = document.querySelector('.profile__avatar');
+// export const avatarInput = document.querySelector('.modal__input_avatar');
+
 // Photos form data
 export const captionInput = document.querySelector('.modal__input_caption');
 export const imageInput = document.querySelector('.modal__input_image-link');
