@@ -21,6 +21,7 @@ import {
         captionInput,
         imageInput,
     } from './utils.js';
+import { pitch } from "file-loader";
 
 const api = new Api({
     server: "https://around.nomoreparties.co/v1/group-2",
@@ -35,32 +36,55 @@ const api = new Api({
 const cardTemplateSelector = '.grid__card-template';
 const listWrapper = document.querySelector('.grid__photos');
 
-api.getCardList()
-    .then((defaultCards) => {
-        const cards = [];
-        for (let card of defaultCards) {
-            let newCard = new Card(card, cardTemplateSelector, () => {
-                popupImage.open(card);
-            });
-            newCard = newCard.getCard();
-            cards.push(newCard);
-        } 
-        return cards;
-    })
-    .then(res => {
-        console.log(res)
-        const cardList = new Section(
-            {
-              items: res,
-              renderer: (element) => {
-                  cardList.addItem(element);
-              },
-            }, listWrapper
-          );
-          cardList.renderer();
-          return cardList;
-    })
-    .catch(console.log);
+api.getAppInfo()
+    .then(([cardList, userInfo]) => {
+    api
+        .getCardList()
+        .then((defaultCards) => {
+            const cards = [];
+            for (let card of defaultCards) {
+                let newCard = new Card(card, cardTemplateSelector, () => {
+                    popupImage.open(card);
+                });
+                newCard = newCard.getCard();
+                cards.push(newCard);
+            } 
+            return cards;
+        })
+        .then(res => {
+            const cardList = new Section(
+                {
+                items: res,
+                renderer: (element) => {
+                    cardList.addItem(element);
+                },
+                }, listWrapper
+            );
+            cardList.renderer();
+            return cardList;
+        })
+        // .catch(console.log);
+
+    const addPopup = new PopupWithForm('.modal_image', (data) => {
+        api
+            .addCard({ name: captionInput.value, link: imageInput.value })
+            .then(res => {
+                let newCard = new Card(data => {
+                    popupImage.open(data)
+                });
+                cardList.addItem(newCard.getCard());
+            })
+            // .catch(() => console.log('Error with add image modal api'));
+        });
+    
+    addPopup.setEventListeners();
+    
+    imageFormOpen.addEventListener('click', (evt) => {
+        evt.preventDefault();
+    
+        addPopup.open();
+    });
+})
 
 
 // UserInfo data
@@ -100,41 +124,22 @@ const editPopup = new PopupWithForm('.modal_profile', (data) => {
         });
 })
 
+editPopup.setEventListeners();
 
-const addPopup = new PopupWithForm('.modal_image', (data) => {
-    const cardInfo = {
-    name: captionInput.value,
-    link: imageInput.value,
-}
 
-// let newCard = new Card(cardInfo, cardTemplateSelector, (data) => {
-//     popupImage.open(data)
-// });
-// cardList.addItem(newCard.getCard());
-// })
+// Form open event listeners
+profileFormOpen.addEventListener('click', (evt) => {
+    evt.preventDefault();
 
-//   api
-//     .addNewCard(data)
-//     .then((cardInfo) => {
-//         let newCard = new Card(cardInfo, 
-//             card._id,
-//             card.name,
-//             card.link,
-//             cardTemplateSelector,
-//             card.likes,
-//             card.ownerId,
-//             userInfo._id,
-//             handleCardClick,
-//             handleLikeClick,
-//             (data) => {
-//             popupImage.open(data)
-//         });
-    
-
+    editPopup.open();
 });
 
-editPopup.setEventListeners();
-addPopup.setEventListeners();
+
+// Validation
+const profileFormValidation = new FormValidator(defaultConfig, profileModal);
+const imageFormValidation = new FormValidator(defaultConfig, imageModal);
+profileFormValidation.enableValidation();
+imageFormValidation.enableValidation();
 
 
 // Delete cards
@@ -197,23 +202,3 @@ popTemp.addEventListener('click', (evt) => {
     evt.stopPropagation();
 });
 
-
-// Validation
-const profileFormValidation = new FormValidator(defaultConfig, profileModal);
-const imageFormValidation = new FormValidator(defaultConfig, imageModal);
-profileFormValidation.enableValidation();
-imageFormValidation.enableValidation();
-
-
-// Form open event listeners
-profileFormOpen.addEventListener('click', (evt) => {
-    evt.preventDefault();
-
-    editPopup.open();
-});
-
-imageFormOpen.addEventListener('click', (evt) => {
-    evt.preventDefault();
-
-    addPopup.open();
-});
