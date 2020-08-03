@@ -8,6 +8,9 @@ export default class PopupWithForm extends Popup {
         this._form = document.querySelector('.modal__form');
         this._inputList = this._form.querySelectorAll('.modal__input');
         [this._name, this._job] = this._inputList;
+
+        this._saveButton = document.querySelector('.modal__save-btn');
+        this._buttonCopy = this._saveButton.textContent;
     }
 
     _getInputValues() {
@@ -42,4 +45,12 @@ export default class PopupWithForm extends Popup {
 
         this._form.reset();
       }
+
+    buttonSaving() {
+        this._saveButton.textContent = 'Saving...';
+    }
+
+    buttonSaveSuccess() {
+        this._saveButton.textContent = this._buttonCopy;
+    }
 }

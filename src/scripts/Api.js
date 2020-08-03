@@ -6,7 +6,6 @@ export default class Api {
 
     getCardList() {
         return fetch(`${this.server}/cards`, {
-            method: 'GET',
             headers: this.headers,
         }).then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))
         .catch(console.log);
@@ -14,7 +13,6 @@ export default class Api {
 
     getUserInfo() {
         return fetch(`${this.server}/users/me/`, {
-            method: "GET",
             headers: this.headers,
         }) .then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))
         .catch(console.log);
@@ -25,7 +23,7 @@ export default class Api {
     }
 
     addCard({ name, link }) {
-        return fetch(`${this.server}/cards/`, {
+        return fetch(`${this.server}/cards`, {
             method: 'POST',
             headers: this.headers,
             body: JSON.stringify({
@@ -36,7 +34,7 @@ export default class Api {
         .catch(console.log('Problem fetching API results'));
     }
 
-    toggleLike(id, like) {
+    toggleLike(cardId, likes) {
         const method = isLiked ? 'DELETE' : 'PUT';
         return fetch(this.server + `/cards/likes/${cardID}`, {
             method: method,
@@ -52,7 +50,7 @@ export default class Api {
         return fetch(this.server + `/cards/${cardID}`, {
             method: 'DELETE',
             headers: this.headers,
-        });
+        }).then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))
     }
 
     updateUserInfo({ name, job }) {

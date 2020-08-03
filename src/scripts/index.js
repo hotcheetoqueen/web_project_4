@@ -18,6 +18,7 @@ import {
         userName,
         userJob,
         userAvatar,
+        avatarInput,
         captionInput,
         imageInput,
     } from './utils.js';
@@ -30,7 +31,6 @@ const api = new Api({
         "Content-Type": "application/json"
     }
 });
-
 
 // Image cards
 const cardTemplateSelector = '.grid__card-template';
@@ -45,7 +45,12 @@ api.getAppInfo()
             for (let card of defaultCards) {
                 let newCard = new Card(card, cardTemplateSelector, () => {
                     popupImage.open(card);
-                });
+                },  (card) => {
+                        api.removeCard(card.id())
+                            .then(res => {
+                                console.log('!!!')
+                            })
+                    });
                 newCard = newCard.getCard();
                 cards.push(newCard);
             } 
@@ -71,10 +76,10 @@ api.getAppInfo()
             .then(res => {
                 let newCard = new Card(data => {
                     popupImage.open(data)
-                });
+                }, cardTemplateSelector, handleDeleteClick);
                 cardList.addItem(newCard.getCard());
             })
-            // .catch(() => console.log('Error with add image modal api'));
+            .catch(() => console.log('Error with add image modal api'));
         });
     
     addPopup.setEventListeners();
@@ -104,9 +109,9 @@ api
     // });
 
 
-// Form modals
-const editPopup = new PopupWithForm('.modal_profile', (data) => {
-    // e.preventDefault();
+// User info updates
+const editPopup = new PopupWithForm('.modal_profile', (data, e) => {
+    e.preventDefault();
 
     api
         .updateUserInfo(data)
@@ -119,19 +124,43 @@ const editPopup = new PopupWithForm('.modal_profile', (data) => {
         .then(() => {
             editPopup.buttonSaveSuccess();
         })
-        .catch((err) => {
-            console.log(err);
-        });
+        // .catch((err) => {
+        //     console.log(err);
+        // });
 })
 
 editPopup.setEventListeners();
 
-
-// Form open event listeners
 profileFormOpen.addEventListener('click', (evt) => {
     evt.preventDefault();
 
     editPopup.open();
+});
+
+
+// Profile image updates
+const avatarPopup = new PopupWithForm('.modal_avatar', (data, e) => {
+    evt.preventDefault();
+
+    api
+        .setUserAvatar(inputValues.avatar)
+        .then(({ avatar }) => {
+            userAvatar.src = avatar;
+            avatarPopup.close();
+      })
+      .then(() => {
+        avatarPopup.buttonSaveSuccess();
+      })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+
+  avatarPopup.setEventListeners();
+
+  userAvatar.addEventListener("click", () => {
+    avatarPopup.open();
+  });
 });
 
 
@@ -158,26 +187,25 @@ imageFormValidation.enableValidation();
 
 // deletePopup.setEventListeners();
 
-
-
-// Liking tools
-// Like handler
-// if (!card.isLiked()) {
-//     api.addLike(cardID)
-//         .then((res) => {
-//             card.setLiked(res.likes.some((user) => user._id === me));
-//             card.setLikes(res.likes);
-//             card.render();
-//         }).catch(console.log);
-//     } else {
-//         api.removeLike(cardId)
-//         .then((res) => )
+// handleDeleteClick: () => {
+//     api.removeCard(data._id)
+//         .then(res => {
+//             console.log('handleDeleteClick works!')
+//         })
 //     }
-// function handleLikeClick(card, cardId, isLiked) {
-//     api.updateLikes(cardId, isLiked).then((data) => {
+
+
+
+// Liker tool
+// function handleLikeClick(card, cardId) {
+//     api.toggleLike(cardId).then((data) => {
 //       card._likes = data.likes;
 //     })
-// }
+    // .catch((err) => {
+    //   console.log(err);
+    // });
+//   }
+
 
 
 // Image expand
@@ -201,4 +229,3 @@ popTemp.addEventListener('click', (evt) => {
     togglePopHandler(evt);
     evt.stopPropagation();
 });
-
