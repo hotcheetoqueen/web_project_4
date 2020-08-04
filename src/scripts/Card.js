@@ -47,7 +47,7 @@ export default class Card {
 
     _likedByUser() {
         for (let i = 0; i < this._likes.length; i++) {
-            if (this._likes[i].id === this._userId) {
+            if (this._likes[i]._id === this._userId) {
               return true;
             }
           }
@@ -60,13 +60,13 @@ export default class Card {
     }
 
     _setEventListeners() {
-        this._card.querySelector('.grid__photos-liker').addEventListener('click', (e) => {
-            e.target.classList.toggle('grid__photos-liker_on');
+        this._card.querySelector('.grid__photos-liker').addEventListener('click', () => {
+            this._liker.classList.toggle('grid__photos-liker_on');
             
         if (this._likedByUser()) {
-            this._likeCounter.textContent = parseInt(--this._likes.length);
+            this._likeCounter.textContent = parseInt(--this._likeCount);
             } else {
-            this._likeCounter.textContent = parseInt(++this._likes.length);
+            this._likeCounter.textContent = parseInt(++this._likeCount);
             }
 
             this._handleLikeClick(this, this._id, this._likedByUser());

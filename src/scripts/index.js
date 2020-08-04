@@ -36,6 +36,7 @@ const api = new Api({
 const cardTemplateSelector = '.grid__card-template';
 const listWrapper = document.querySelector('.grid__photos');
 
+
 api.getAppInfo()
     .then(([cardList, userInfo]) => {
     api
@@ -45,12 +46,7 @@ api.getAppInfo()
             for (let card of defaultCards) {
                 let newCard = new Card(card, card.likes, cardTemplateSelector, () => {
                     popupImage.open(card);
-                }, (card) => {
-                        api.removeCard(card.id())
-                            .then(res => {
-                                console.log('!!!')
-                            })
-                    });
+                }, openDeleteModal);
                 newCard = newCard.getCard();
                 cards.push(newCard);
             } 
@@ -76,12 +72,14 @@ api.getAppInfo()
             .then(res => {
                 let newCard = new Card(data => {
                     popupImage.open(data)
-                }, cardTemplateSelector, handleDeleteClick);
+                }, cardTemplateSelector, openDeleteModal);
                 cardList.addItem(newCard.getCard());
             })
             .catch(() => console.log('Error with add image modal api'));
         });
     
+        // , data.likes, userInfo._id, handleLikeClick
+
     addPopup.setEventListeners();
     
     imageFormOpen.addEventListener('click', (evt) => {
@@ -172,28 +170,22 @@ imageFormValidation.enableValidation();
 
 
 // Delete cards
-// const deletePopup = new PopupWithConfirm('.modal_delete');
+const deletePopup = new PopupWithConfirm('.modal_delete', deleteSubmit);
 
-// function openDeleteModal(card, cardId) {
-//     deletePopup.open(card, cardId);
-// }
+function openDeleteModal(card, cardId) {
+    deletePopup.open(card, cardId);
+}
 
-// function deleteSubmit(card, cardId) {
-//     api.deleteCard(cardId);
-//     deletePopup.close();
-//     card.remove();
-//     card = null;
-// }
+function deleteSubmit(card, cardId) {
+    api.removeCard(data._id)
+    .then(() => {
+        deletePopup.close();
+        card.remove();
+        card = null;
+    })
+}
 
-// deletePopup.setEventListeners();
-
-// handleDeleteClick: () => {
-//     api.removeCard(data._id)
-//         .then(res => {
-//             console.log('handleDeleteClick works!')
-//         })
-//     }
-
+deletePopup.setEventListeners();
 
 
 // Liker tool

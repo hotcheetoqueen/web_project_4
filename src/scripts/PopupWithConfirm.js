@@ -9,11 +9,11 @@ export default class PopupWithConfirm extends Popup {
     setEventListeners() {
         super.setEventListeners();
         this._popupElement.addEventListenter('submit', () => {
-            this._handleFormSubmit(this._card, this._cardId);
+            this._handleFormSubmit(this._cardId, this._card);
         });
     }
 
-    open(card, cardId) {
+    open(cardId, card) {
         this._cardId = cardId;
         this._card = card;
         super.open();
