@@ -66,13 +66,35 @@ api.getAppInfo()
         })
         // .catch(console.log);
 
+    // Image expand
+    const popupImage = new PopupWithImage('.modal_photo');
+
+    popupImage.setEventListeners();
+
+    const togglePopHandler = ({ name, link }) => {
+        popupImage.open({ name, link });
+    };
+
+    const popTemp = document.querySelector('.grid__card-template');
+
+    popTemp.addEventListener('click', (evt) => {
+        const popImage = document.querySelector('.modal_photo__image');
+        const popTitle = document.querySelector('.modal_photo__caption');
+
+        popImage.src = `${link}`;
+        popTitle.textContent = name;
+
+        togglePopHandler(evt);
+        evt.stopPropagation();
+    });
+
     const addPopup = new PopupWithForm('.modal_image', (data) => {
         api
             .addCard({ name: captionInput.value, link: imageInput.value })
             .then(res => {
-                let newCard = new Card(data => {
+                let newCard = new Card((data) => {
                     popupImage.open(data)
-                }, cardTemplateSelector, openDeleteModal);
+                }, card.likes, cardTemplateSelector, handleCardClick, openDeleteModal);
                 cardList.addItem(newCard.getCard());
             })
             .catch(() => console.log('Error with add image modal api'));
@@ -137,7 +159,7 @@ profileFormOpen.addEventListener('click', (evt) => {
 
 
 // Profile image updates
-const avatarPopup = new PopupWithForm('.modal_avatar', (data, e) => {
+const avatarPopup = new PopupWithForm('.modal_avatar', (data, evt) => {
     evt.preventDefault();
 
     api
@@ -156,7 +178,7 @@ const avatarPopup = new PopupWithForm('.modal_avatar', (data, e) => {
 
   avatarPopup.setEventListeners();
 
-  userAvatar.addEventListener("click", () => {
+  userAvatar.addEventListener('click', () => {
     avatarPopup.open();
   });
 });
@@ -177,7 +199,7 @@ function openDeleteModal(card, cardId) {
 }
 
 function deleteSubmit(card, cardId) {
-    api.removeCard(data._id)
+    api.removeCard(data.id())
     .then(() => {
         deletePopup.close();
         card.remove();
@@ -199,25 +221,3 @@ function handleLikeClick(card, cardId, isLiked) {
   }
 
 
-
-// Image expand
-const popupImage = new PopupWithImage('.modal_photo');
-
-popupImage.setEventListeners();
-
-const togglePopHandler = ({ name, link }) => {
-    popupImage.open({ name, link });
-};
-
-const popTemp = document.querySelector('.grid__card-template');
-
-popTemp.addEventListener('click', (evt) => {
-    const popImage = document.querySelector('.modal_photo__image');
-    const popTitle = document.querySelector('.modal_photo__caption');
-
-    popImage.src = `${link}`;
-    popTitle.textContent = name;
-
-    togglePopHandler(evt);
-    evt.stopPropagation();
-});
