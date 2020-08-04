@@ -43,9 +43,9 @@ api.getAppInfo()
         .then((defaultCards) => {
             const cards = [];
             for (let card of defaultCards) {
-                let newCard = new Card(card, cardTemplateSelector, () => {
+                let newCard = new Card(card, card.likes, cardTemplateSelector, () => {
                     popupImage.open(card);
-                },  (card) => {
+                }, (card) => {
                         api.removeCard(card.id())
                             .then(res => {
                                 console.log('!!!')
@@ -197,14 +197,14 @@ imageFormValidation.enableValidation();
 
 
 // Liker tool
-// function handleLikeClick(card, cardId) {
-//     api.toggleLike(cardId).then((data) => {
-//       card._likes = data.likes;
-//     })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
-//   }
+function handleLikeClick(card, cardId, isLiked) {
+    api.toggleLike(cardId, isLiked).then((data) => {
+      card._likes = data.likes;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 
 
 

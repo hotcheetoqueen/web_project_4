@@ -1,10 +1,12 @@
 export default class Card {
-    constructor(data, cardTemplateSelector, handleCardClick, handleDeleteClick, 
-        userId, cardId, ownerId, handleLikeClick, likes, likeCounter) {
+    constructor({ name, link, id }, likes, cardTemplateSelector, handleCardClick, handleDeleteClick, 
+        userId, cardId, ownerId, handleLikeClick, likeCounter) {
 
-        this._name = data.name;
-        this._link = data.link;
-        this._id = data._id;
+            console.log(likes);
+
+        this._name = name;
+        this._link = link;
+        this._id = id;
 
         this._ownerId = ownerId;
         this._userId = userId;
@@ -18,7 +20,7 @@ export default class Card {
         this._likes = likes;
         this._likeCounter = likeCounter;
         this._handleLikeClick = handleLikeClick;
-        // this._likeCount = likes.length;
+        this._likeCount = likes.length;
     }
 
     _createCard() {
@@ -36,21 +38,21 @@ export default class Card {
         this._deleteButton = cardTemplate.querySelector('.grid__photos-delete');
 
         return cardTemplate;
-}
+    }
 
 
     id() {
         return this._id;
     }
 
-    // _likedByUser() {
-    //     for (let i = 0; i < this._likes.length; i++) {
-    //         if (this._likes[i]._id === this._userId) {
-    //           return true;
-    //         }
-    //       }
-    //       return false;
-    // }
+    _likedByUser() {
+        for (let i = 0; i < this._likes.length; i++) {
+            if (this._likes[i].id === this._userId) {
+              return true;
+            }
+          }
+          return false;
+    }
 
     _removeCard() {
         this._card.remove();
@@ -61,13 +63,13 @@ export default class Card {
         this._card.querySelector('.grid__photos-liker').addEventListener('click', (e) => {
             e.target.classList.toggle('grid__photos-liker_on');
             
-        // if (this._likedByUser()) {
-        //     this._likeCounter.textContent = parseInt(--this._likes.length);
-        //     } else {
-        //     this._likeCounter.textContent = parseInt(++this._likes.length);
-        //     }
+        if (this._likedByUser()) {
+            this._likeCounter.textContent = parseInt(--this._likes.length);
+            } else {
+            this._likeCounter.textContent = parseInt(++this._likes.length);
+            }
 
-            // this._handleLikeClick(this, this._id, this._likedByUser());
+            this._handleLikeClick(this, this._id, this._likedByUser());
         });
     
         this._card.querySelector('.grid__photos-delete').addEventListener('click', () => 
@@ -89,10 +91,10 @@ export default class Card {
 
         this._card.querySelector('.grid__photos-image').style.backgroundImage = `url('${this._link}')`;
         this._card.querySelector('.grid__photos-caption').textContent = this._name;
-        // this._card.querySelector('.grid__photos-like-counter').textContent = this._likeCount;
-        //     if (this._likedByUser()) {
-        //         this._liker.classList.add('grid__photos-liker_on');
-        //     }
+        this._card.querySelector('.grid__photos-like-counter').textContent = this._likeCount;
+            if (this._likedByUser()) {
+                this._liker.classList.add('grid__photos-liker_on');
+            }
 
         this._setEventListeners();
 
