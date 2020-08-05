@@ -27,16 +27,16 @@ export default class Api {
             method: 'POST',
             headers: this.headers,
             body: JSON.stringify({
-                name: name,
-                link: link,
+                name,
+                link,
             }),
         }) .then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))
-        .catch(console.log('Problem fetching API results'));
+        .catch(console.log('Problem fetching addCard API results'));
     }
 
     toggleLike(cardId, isLiked) {
         const method = isLiked ? 'DELETE' : 'PUT';
-        return fetch(this.server + `/cards/likes/${cardId}`, {
+        return fetch(`${this.server}/cards/likes/${cardId}/`, {
             method: method,
             headers: this.headers,
         }).then((res) => {
@@ -47,7 +47,7 @@ export default class Api {
     }
 
     deleteCard(cardId) {
-        return fetch(this.server + `/cards/${cardId}`, {
+        return fetch(this.server + `/cards/${cardId}/`, {
             method: 'DELETE',
             headers: this.headers,
         }).then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))

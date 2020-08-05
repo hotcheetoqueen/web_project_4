@@ -9,7 +9,6 @@ import PopupWithConfirm from './PopupWithConfirm.js';
 import Section from './Section.js';
 import UserInfo from './UserInfo.js';
 import {         
-        defaultCards, 
         defaultConfig, 
         imageModal, 
         profileModal, 
@@ -36,80 +35,85 @@ const cardTemplateSelector = '.grid__card-template';
 const listWrapper = document.querySelector('.grid__photos');
 
 
+// App info collected
 api.getAppInfo()
     .then(([cardList, userInfo]) => {
     api
         .getCardList()
-        .then((defaultCards) => {
+        .then((serverCards) => {
             const cards = [];
-            for (const card of defaultCards) {
+            for (const card of serverCards) {
                 let newCard = new Card(card, card.likes, cardTemplateSelector, () => {
                     popupImage.open(card);
-                }, openDeleteModal);
+                }, openDeleteModal, handleLikeClick);
                 newCard = newCard.getCard();
                 cards.push(newCard);
             } 
             return cards;
         })
         .then(res => {
-            const cardList = new Section(
+            const cardBatch = new Section(
                 {
                 items: res,
                 renderer: (element) => {
-                    cardList.addItem(element);
+                    cardBatch.addItem(element);
                 },
                 }, listWrapper
             );
-            cardList.renderer();
-            return cardList;
+            cardBatch.renderer();
+            return cardBatch;
+
         })
         // .catch(console.log);
 
-    // Image expand
-    const popupImage = new PopupWithImage('.modal_photo');
+        // Image expand
+        const popupImage = new PopupWithImage('.modal_photo');
 
-    popupImage.setEventListeners();
+        popupImage.setEventListeners();
 
-    const togglePopHandler = ({ name, link }) => {
-        popupImage.open({ name, link });
-    };
+        const togglePopHandler = ({ name, link }) => {
+            popupImage.open({ name, link });
+        };
 
-    const popTemp = document.querySelector('.grid__card-template');
+        const popTemp = document.querySelector('.grid__card-template');
 
-    popTemp.addEventListener('click', (evt) => {
-        const popImage = document.querySelector('.modal_photo__image');
-        const popTitle = document.querySelector('.modal_photo__caption');
+        popTemp.addEventListener('click', (evt) => {
+            const popImage = document.querySelector('.modal_photo__image');
+            const popTitle = document.querySelector('.modal_photo__caption');
 
-        popImage.src = `${link}`;
-        popTitle.textContent = name;
+            popImage.src = link;
+            popTitle.textContent = name;
 
-        togglePopHandler(evt);
-        evt.stopPropagation();
-    });
-
-    const addPopup = new PopupWithForm('.modal_image', (data) => {
-        api
-            .addCard({ name: captionInput.value, link: imageInput.value })
-            .then(res => {
-                const newCard = new Card((data) => {
-                    popupImage.open(data)
-                }, card.likes, cardTemplateSelector, handleCardClick, openDeleteModal);
-                cardList.addItem(newCard.getCard());
-            })
-            .catch(() => console.log('Error with add image modal api'));
+            togglePopHandler(evt);
+            evt.stopPropagation();
         });
-    
-        // , data.likes, userInfo._id, handleLikeClick
 
-    addPopup.setEventListeners();
-    
-    imageFormOpen.addEventListener('click', (evt) => {
-        evt.preventDefault();
-    
-        addPopup.open();
-    });
-})
+    // card.likes, 
+        // Add new cards
+        const addPopup = new PopupWithForm('.modal_image', (data) => {
+            api
+                .addCard({ name: captionInput.value, link: imageInput.value })
+                .then(res => {
+                    const newCard = new Card((card) => {
+                        popupImage.open(card)
+                    }, cardTemplateSelector, openDeleteModal, handleLikeClick);
+                    cardList.addItem(newCard.getCard());
+                }).then(() => {
+                    addPopup.buttonSaveSuccess();
+                })            
+                .catch(() => console.log('Error with add image modal api'));
+            });
+        
+            // , data.likes, userInfo._id, handleLikeClick
 
+        addPopup.setEventListeners();
+        
+        imageFormOpen.addEventListener('click', (evt) => {
+            evt.preventDefault();
+        
+            addPopup.open();
+        });
+    })
 
 // UserInfo data
 const userInfo = new UserInfo({ 
@@ -134,8 +138,8 @@ const editPopup = new PopupWithForm('.modal_profile', (data, e) => {
 
     api
         .updateUserInfo(data)
-        .then((data) => {
-            userInfo.setUserInfo(data);
+        .then((values) => {
+            userInfo.setUserInfo(values);
         })
         .then(() => {
             editPopup.close();
@@ -158,26 +162,35 @@ profileFormOpen.addEventListener('click', (evt) => {
 
 
 // Profile image updates
-const avatarPopup = new PopupWithForm('.modal_avatar', (data, evt) => {
-    evt.preventDefault();
-
+const avatarPopup = new PopupWithForm('.modal_avatar', {    
+    handleFormSubmit: (avatar) => {
+//   api
+//     .setUserAvatar(avatar)
+//     .then((result) => {
+//         userInfo.setUserAvatar(result.avatar);
+//         userInfo.setUserInfo();
+//         avatarPopup.close();
+//     })
+//     .finally(() => avatarPopup.buttonSaveSuccess());
+// },
     api
     .setUserAvatar(inputValues.avatar)
-    .then(({ avatar }) => {
-        userAvatar.src = avatar;
-        // .setUserAvatar(avatar)
-        // .then((data) => {
-        //     userInfo.setUserAvatar(data.avatar);
-        //     userInfo.setUserInfo();
-            // userAvatar.src = avatar;
+    // .then(({ avatar }) => {
+    //     // userAvatar.src = avatar;
+    //     .setUserAvatar(avatar)
+        .then(({ avatar }) => {
+            // userInfo.setUserAvatar(data.avatar);
+            // userInfo.setUserInfo();
+            userAvatar.src = avatar;
             avatarPopup.close();
       })
       .then(() => {
         avatarPopup.buttonSaveSuccess();
       })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+      .catch((err) => {
+        console.log(err);
+      });
+    }
     });
 
   avatarPopup.setEventListeners();
@@ -203,7 +216,7 @@ function openDeleteModal(card, cardId) {
 }
 
 function deleteSubmit(card, cardId) {
-    api.removeCard(data.id())
+    api.removeCard(cardId)
     .then(() => {
         deletePopup.close();
         card.remove();

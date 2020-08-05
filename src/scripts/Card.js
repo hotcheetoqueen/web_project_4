@@ -1,8 +1,6 @@
 export default class Card {
-    constructor({ name, link, id }, likes, cardTemplateSelector, handleCardClick, handleDeleteClick, 
-        userId, cardId, ownerId, handleLikeClick, likeCounter) {
-
-            console.log(likes);
+    constructor({ name, link, id }, likes, cardTemplateSelector, handleCardClick, handleDeleteClick, handleLikeClick,
+        userId, cardId, ownerId, likeCounter) {
 
         this._name = name;
         this._link = link;
@@ -10,7 +8,7 @@ export default class Card {
 
         this._ownerId = ownerId;
         this._userId = userId;
-        this._admin = this._ownerId === this._userId;
+        this._isAdmin = this._ownerId === this._userId;
         this._cardId = cardId;
 
         this._handleDeleteClick = handleDeleteClick;
@@ -46,12 +44,12 @@ export default class Card {
     }
 
     _likedByUser() {
-        for (let i = 0; i < this._likes.length; i++) {
-            if (this._likes[i]._id === this._userId) {
-              return true;
+        this._likes.forEach((card) => {
+            if (this._userId === this._likes[i]._id) {
+                return true;
             }
-          }
           return false;
+        });
     }
 
     _removeCard() {
@@ -60,20 +58,20 @@ export default class Card {
     }
 
     _setEventListeners() {
-        this._card.querySelector('.grid__photos-liker').addEventListener('click', () => {
+        this._liker.addEventListener('click', () => {
             this._liker.classList.toggle('grid__photos-liker_on');
             
         if (this._likedByUser()) {
-            this._likeCounter.textContent = parseInt(--this._likeCount);
+            this._likeCounter.textContent --;
             } else {
-            this._likeCounter.textContent = parseInt(++this._likeCount);
+            this._likeCounter.textContent ++;
             }
 
-            this._handleLikeClick(this, this._id, this._likedByUser());
+            this._handleLikeClick(this, this.id(), this._likedByUser());
         });
     
-        this._card.querySelector('.grid__photos-delete').addEventListener('click', () => 
-            this._handleDeleteClick(this._id));
+        this._deleteButton.addEventListener('click', () => 
+            this._handleDeleteClick(this.id()));
 
         this._card.querySelector('.grid__photos-image').addEventListener('click', () => {
             this._handleCardClick({
@@ -85,13 +83,13 @@ export default class Card {
 
     getCard() {
         this._card = this._createCard();
-        if (!this._admin) {
+        if (!this._isAdmin) {
             this._card.classList.remove('grid__photos-delete');
         }
 
         this._card.querySelector('.grid__photos-image').style.backgroundImage = `url('${this._link}')`;
         this._card.querySelector('.grid__photos-caption').textContent = this._name;
-        this._card.querySelector('.grid__photos-like-counter').textContent = this._likeCount;
+        this._likeCounter.textContent = this._likeCount;
             if (this._likedByUser()) {
                 this._liker.classList.add('grid__photos-liker_on');
             }

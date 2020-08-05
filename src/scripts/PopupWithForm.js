@@ -7,7 +7,7 @@ export default class PopupWithForm extends Popup {
         this._handleFormSubmit = handleFormSubmit;
         this._form = this._popupElement.querySelector('.modal__form');
         this._inputList = this._form.querySelectorAll('.modal__input');
-        [this._name, this._job] = this._inputList;
+        [this._name, this._job, this._avatar] = this._inputList;
 
         this._saveButton = document.querySelector('.modal__save-btn');
         this._buttonCopy = this._saveButton.textContent;
@@ -37,6 +37,7 @@ export default class PopupWithForm extends Popup {
         if (inputValues) {
             this._name.textContent = inputValues.name;
             this._job.textContent = inputValues.job;
+            this._avatar.src = inputValues.avatar;
         }
     }
 
