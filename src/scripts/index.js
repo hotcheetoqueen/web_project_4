@@ -64,7 +64,6 @@ api.getAppInfo()
             return cardBatch;
 
         })
-        // .catch(console.log);
 
         // Image expand
         const popupImage = new PopupWithImage('.modal_photo');
@@ -88,7 +87,6 @@ api.getAppInfo()
             evt.stopPropagation();
         });
 
-    // card.likes, 
         // Add new cards
         const addPopup = new PopupWithForm('.modal_image', (data) => {
             api
@@ -103,8 +101,6 @@ api.getAppInfo()
                 })            
                 .catch(() => console.log('Error with add image modal api'));
             });
-        
-            // , data.likes, userInfo._id, handleLikeClick
 
         addPopup.setEventListeners();
         
@@ -127,9 +123,6 @@ api
     .then((data) => {
         userInfo.setUserInfo(data);
     })
-    // .catch((err) => {
-    //     console.log(err);
-    // });
 
 
 // User info updates
@@ -147,9 +140,6 @@ const editPopup = new PopupWithForm('.modal_profile', (data, e) => {
         .then(() => {
             editPopup.buttonSaveSuccess();
         })
-        // .catch((err) => {
-        //     console.log(err);
-        // });
 })
 
 editPopup.setEventListeners();
@@ -164,20 +154,8 @@ profileFormOpen.addEventListener('click', (evt) => {
 // Profile image updates
 const avatarPopup = new PopupWithForm('.modal_avatar', {    
     handleFormSubmit: (avatar) => {
-//   api
-//     .setUserAvatar(avatar)
-//     .then((result) => {
-//         userInfo.setUserAvatar(result.avatar);
-//         userInfo.setUserInfo();
-//         avatarPopup.close();
-//     })
-//     .finally(() => avatarPopup.buttonSaveSuccess());
-// },
     api
     .setUserAvatar(inputValues.avatar)
-    // .then(({ avatar }) => {
-    //     // userAvatar.src = avatar;
-    //     .setUserAvatar(avatar)
         .then(({ avatar }) => {
             // userInfo.setUserAvatar(data.avatar);
             // userInfo.setUserInfo();
