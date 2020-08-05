@@ -18,11 +18,10 @@ import {
         userName,
         userJob,
         userAvatar,
-        avatarInput,
+        avatarContainer,
         captionInput,
         imageInput,
     } from './utils.js';
-import { pitch } from "file-loader";
 
 const api = new Api({
     server: "https://around.nomoreparties.co/v1/group-2",
@@ -43,7 +42,7 @@ api.getAppInfo()
         .getCardList()
         .then((defaultCards) => {
             const cards = [];
-            for (let card of defaultCards) {
+            for (const card of defaultCards) {
                 let newCard = new Card(card, card.likes, cardTemplateSelector, () => {
                     popupImage.open(card);
                 }, openDeleteModal);
@@ -92,7 +91,7 @@ api.getAppInfo()
         api
             .addCard({ name: captionInput.value, link: imageInput.value })
             .then(res => {
-                let newCard = new Card((data) => {
+                const newCard = new Card((data) => {
                     popupImage.open(data)
                 }, card.likes, cardTemplateSelector, handleCardClick, openDeleteModal);
                 cardList.addItem(newCard.getCard());
@@ -163,9 +162,14 @@ const avatarPopup = new PopupWithForm('.modal_avatar', (data, evt) => {
     evt.preventDefault();
 
     api
-        .setUserAvatar(inputValues.avatar)
-        .then(({ avatar }) => {
-            userAvatar.src = avatar;
+    .setUserAvatar(inputValues.avatar)
+    .then(({ avatar }) => {
+        userAvatar.src = avatar;
+        // .setUserAvatar(avatar)
+        // .then((data) => {
+        //     userInfo.setUserAvatar(data.avatar);
+        //     userInfo.setUserInfo();
+            // userAvatar.src = avatar;
             avatarPopup.close();
       })
       .then(() => {
@@ -178,7 +182,7 @@ const avatarPopup = new PopupWithForm('.modal_avatar', (data, evt) => {
 
   avatarPopup.setEventListeners();
 
-  userAvatar.addEventListener('click', () => {
+  avatarContainer.addEventListener('click', () => {
     avatarPopup.open();
   });
 
