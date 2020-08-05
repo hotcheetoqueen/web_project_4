@@ -174,14 +174,14 @@ const avatarPopup = new PopupWithForm('.modal_avatar', (data, evt) => {
     //   .catch((err) => {
     //     console.log(err);
     //   });
-
+    });
 
   avatarPopup.setEventListeners();
 
   userAvatar.addEventListener('click', () => {
     avatarPopup.open();
   });
-});
+
 
 
 // Validation

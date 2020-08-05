@@ -34,9 +34,9 @@ export default class Api {
         .catch(console.log('Problem fetching API results'));
     }
 
-    toggleLike(cardId, likes) {
+    toggleLike(cardId, isLiked) {
         const method = isLiked ? 'DELETE' : 'PUT';
-        return fetch(this.server + `/cards/likes/${cardID}`, {
+        return fetch(this.server + `/cards/likes/${cardId}`, {
             method: method,
             headers: this.headers,
         }).then((res) => {
@@ -47,7 +47,7 @@ export default class Api {
     }
 
     deleteCard(cardId) {
-        return fetch(this.server + `/cards/${cardID}`, {
+        return fetch(this.server + `/cards/${cardId}`, {
             method: 'DELETE',
             headers: this.headers,
         }).then(res => res.ok ? res.json() : Promise.reject('Error: ' + res.status))
