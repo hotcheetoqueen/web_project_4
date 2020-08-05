@@ -67,7 +67,7 @@ export default class Card {
             this._likeCounter.textContent ++;
             }
 
-            this._handleLikeClick(this, this.id(), this._likedByUser());
+            this._handleLikeClick(this, this.id, this._likedByUser());
         });
     
         this._deleteButton.addEventListener('click', () => 
