@@ -45,7 +45,7 @@ export default class Card {
 
     _likedByUser() {
         this._likes.forEach((card) => {
-            if (this._userId === this._likes[i]._id) {
+            if (this._userId === this._ownerId) {
                 return true;
             }
           return false;
